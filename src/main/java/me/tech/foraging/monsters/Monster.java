@@ -49,6 +49,8 @@ public class Monster extends ForagingMonster {
 		if(loc.getWorld() == null) return false;
 		this.entity = loc.getWorld().spawnEntity(loc, entityType);
 
+		this.spawnLocation = loc;
+
 		this.foraging.monsters.put(this.entity.getUniqueId(), this);
 		return true;
 	}

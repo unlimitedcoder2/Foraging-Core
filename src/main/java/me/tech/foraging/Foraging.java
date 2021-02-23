@@ -1,21 +1,29 @@
 package me.tech.foraging;
 
 import me.tech.foraging.items.ItemManager;
+import me.tech.foraging.models.monsters.ForagingMonsterAggression;
+import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
+import me.tech.foraging.models.monsters.ForagingMonsterStats;
 import me.tech.foraging.models.player.ForagingPlayer;
 import me.tech.foraging.monsters.Monster;
+import me.tech.foraging.monsters.Zombie;
 import me.tech.foraging.player.events.JoinEvent;
 import me.tech.foraging.player.events.QuitEvent;
 import me.tech.foraging.player.events.RegionEnterEvent;
 import me.tech.foraging.regions.RegionManager;
+import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class Foraging extends JavaPlugin {
@@ -26,7 +34,6 @@ public class Foraging extends JavaPlugin {
 	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 	public HashMap<UUID, Monster> monsters = new HashMap<>();
 	private final HashMap<String, FileConfiguration> configs = new HashMap<>();
-
 
 	@Override
 	public void onEnable() {
@@ -44,6 +51,29 @@ public class Foraging extends JavaPlugin {
 
 		this.itemManager = new ItemManager(this);
 		this.regionManager = new RegionManager(this);
+	
+		List<String> drops = new ArrayList<>();
+		
+		Zombie testZombie = new Zombie(
+				this,
+				"Zombie",
+				10,
+				ForagingMonsterAggression.AGGRESSIVE,
+				new ForagingMonsterStats(
+						5,
+						5
+				),
+				new ForagingMonsterEquipment(
+						new ItemStack(Material.AIR),
+						new ItemStack(Material.AIR),
+						new ItemStack(Material.AIR),
+						new ItemStack(Material.AIR),
+						new ItemStack(Material.AIR),
+						new ItemStack(Material.AIR)
+				),
+				drops
+		);
+
 	}
 
 	@Override

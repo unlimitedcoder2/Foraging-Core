@@ -1,0 +1,21 @@
+monsters:
+  zombie:
+    name: 'Zombie'
+    level: 1
+    entity: 'ZOMBIE'
+    aggression: 'AGGRESSIVE'
+    equipment:
+      mainHand: 'DIAMOND_SWORD'
+    stats:
+      health: 20
+      damage: 50
+  skeleton:
+    name: 'Skeleton'
+    level: 1
+    entity: 'SKELETON'
+    aggression: 'AGGRESSIVE'
+    equipment:
+      mainHand: 'BOW'
+    stats:
+      health: 15
+      damage: 35
