@@ -31,7 +31,7 @@ public class Foraging extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 
-		// Make sure holographic displays is actually enabled.
+		// Make sure required plugins are actually loaded onto the server.
 		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays") || !Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
 			getLogger().severe("HolographicDisplays or WorldGuard was not loaded into the server, automatically disabling server core.");
 			getLogger().severe("Automatic server whitelist has been enabled to prevent any type of data loss.");
