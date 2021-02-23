@@ -79,7 +79,6 @@ public class Foraging extends JavaPlugin {
 			File file = new File(getDataFolder(), String.format("%s.yml", configName));
 
 			if(!file.exists()) {
-//				file.getParentFile().mkdirs();
 				this.saveResource(String.format("%s.yml", configName), false);
 			}
 
