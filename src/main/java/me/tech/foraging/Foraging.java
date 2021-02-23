@@ -68,7 +68,6 @@ public class Foraging extends JavaPlugin {
 		String[] configurations = {"config", "items", "monsters", "regions"};
 
 		for(String configName : configurations) {
-			// Configuration already initialized?
 			File file = new File(getDataFolder(), String.format("%s.yml", configName));
 
 			if(!file.exists()) {

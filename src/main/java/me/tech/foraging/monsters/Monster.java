@@ -13,6 +13,8 @@ class MonsterEquipment {
 	ItemStack chestplate;
 	ItemStack leggings;
 	ItemStack boots;
+	ItemStack mainHand;
+	ItemStack offHand;
 }
 
 public class Monster {
