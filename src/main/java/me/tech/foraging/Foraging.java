@@ -98,24 +98,16 @@ public class Foraging extends JavaPlugin {
 	}
 
 	/**
-	 * @return Items configuration
+	 * Get a specific configuration.
+	 * @param name Configuration name.
+	 * @return FileConfiguration.
 	 */
-	public FileConfiguration getItemsConfig() {
-		return this.configs.get("items");
-	}
-
-	/**
-	 * @return Monsters configuration.
-	 */
-	public FileConfiguration getMonstersConfig() {
-		return this.configs.get("monsters");
-	}
-
-	/**
-	 * @return Regions configuration
-	 */
-	public FileConfiguration getRegionsConfig() {
-		return this.configs.get("regions");
+	public FileConfiguration getConfiguration(String name) {
+		// Just return main config.
+		if(name.equalsIgnoreCase("config")) return this.getConfig();
+		// Check to make sure the config is actually added.
+		if(this.configs.containsKey(name)) return this.configs.get(name);
+		else return null;
 	}
 
 	public static Foraging getInstance() {
