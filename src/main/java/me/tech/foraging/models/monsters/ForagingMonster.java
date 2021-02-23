@@ -1,8 +1,9 @@
 package me.tech.foraging.models.monsters;
 
 import com.gmail.filoghost.holographicdisplays.api.Hologram;
-import me.tech.foraging.models.item.ForagingItem;
 import org.bukkit.entity.Entity;
+
+import java.util.List;
 
 public class ForagingMonster {
 	private final String name;
@@ -13,9 +14,9 @@ public class ForagingMonster {
 	private final ForagingMonsterAggression aggression;
 	private final ForagingMonsterStats stats;
 	private final ForagingMonsterEquipment equipment;
-	private final ForagingItem[] drops;
+	private final List<String> drops;
 
-	public ForagingMonster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment, ForagingItem[] drops) {
+	public ForagingMonster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment, List<String> drops) {
 		this.name = name;
 		this.level = level;
 		this.aggression = aggression;
@@ -56,7 +57,7 @@ public class ForagingMonster {
 		return this.equipment;
 	}
 
-	public ForagingItem[] getDrops() {
+	public List<String> getDrops() {
 		return this.drops;
 	}
 }

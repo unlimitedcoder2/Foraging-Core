@@ -10,12 +10,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
+import java.util.List;
+
 public class Monster extends ForagingMonster {
 	private final Foraging foraging;
 	private Location spawnLocation;
 
-	public Monster(Foraging foraging, String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment) {
-		super(name, level, aggression, stats, equipment);
+	public Monster(Foraging foraging, String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment, List<String> drops) {
+		super(name, level, aggression, stats, equipment, drops);
 		this.foraging = foraging;
 	}
 
