@@ -72,14 +72,14 @@ public class Foraging extends JavaPlugin {
 	 * Initialize all configurations custom configurations.
 	 */
 	private void initConfigs() {
-		String[] configurations = {"items", "monsters", "regions"};
+		String[] configurations = {"config", "items", "monsters", "regions"};
 
 		for(String configName : configurations) {
-			// Configuration already initalized?
+			// Configuration already initialized?
 			File file = new File(getDataFolder(), String.format("%s.yml", configName));
 
 			if(!file.exists()) {
-				file.getParentFile().mkdirs();
+//				file.getParentFile().mkdirs();
 				this.saveResource(String.format("%s.yml", configName), false);
 			}
 
