@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -18,26 +19,20 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class Foraging extends JavaPlugin {
-	private static Foraging instance;
-
 	public ItemManager itemManager;
 	public RegionManager regionManager;
-
+	public PluginManager pluginManager = getServer().getPluginManager();
 	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 
 	private final HashMap<String, FileConfiguration> configs = new HashMap<>();
 
 	@Override
 	public void onEnable() {
-		instance = this;
-
 		// Make sure required plugins are actually loaded onto the server.
-		if(!Bukkit.getPluginManager().isPluginEnabled("HolographicDisplays") || !Bukkit.getPluginManager().isPluginEnabled("WorldGuard")) {
-			getLogger().severe("HolographicDisplays or WorldGuard was not loaded into the server, automatically disabling server core.");
-			getLogger().severe("Automatic server whitelist has been enabled to prevent any type of data loss.");
-			this.setEnabled(false);
+		if(!pluginManager.isPluginEnabled("HolographicDisplays") || !pluginManager.isPluginEnabled("WorldGuard")) {
+			getLogger().severe("HolographicDisplays or WorldGuard was not loaded into the server, automatically disabling plugin.");
+			pluginManager.disablePlugin(this);
 
-			Bukkit.getServer().setWhitelist(true);
 			return;
 		}
 		// Initialize everything pls
@@ -47,8 +42,6 @@ public class Foraging extends JavaPlugin {
 
 		this.itemManager = new ItemManager(this);
 		this.regionManager = new RegionManager(this);
-
-		Bukkit.getServer().setWhitelist(false);
 	}
 
 	@Override
@@ -63,9 +56,9 @@ public class Foraging extends JavaPlugin {
 	 * Initialize all events.
 	 */
 	private void initEvents() {
-		this.getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
-		this.getServer().getPluginManager().registerEvents(new QuitEvent(this), this);
-		this.getServer().getPluginManager().registerEvents(new RegionEnterEvent(this), this);
+		pluginManager.registerEvents(new JoinEvent(this), this);
+		pluginManager.registerEvents(new QuitEvent(this), this);
+		pluginManager.registerEvents(new RegionEnterEvent(this), this);
 	}
 
 	/**
@@ -107,9 +100,5 @@ public class Foraging extends JavaPlugin {
 		// Check to make sure the config is actually added.
 		if(this.configs.containsKey(name)) return this.configs.get(name);
 		else return null;
-	}
-
-	public static Foraging getInstance() {
-		return instance;
 	}
 }

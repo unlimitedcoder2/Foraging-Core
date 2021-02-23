@@ -1,7 +1,7 @@
 package me.tech.foraging.items;
 
 import me.tech.foraging.Foraging;
-import org.bukkit.Bukkit;
+import static me.tech.foraging.utils.ChatUtils.broadcastMessage;
 
 public class ItemManager {
 	private final boolean devMode;
@@ -17,6 +17,7 @@ public class ItemManager {
 		if(this.devMode) {
 			return;
 		}
-		Bukkit.broadcastMessage("not in dev.");
+
+		broadcastMessage(foraging, "not in dev.");
 	}
 }
