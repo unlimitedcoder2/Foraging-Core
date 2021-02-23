@@ -6,16 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
-class MonsterEquipment {
-	ItemStack helmet;
-	ItemStack chestplate;
-	ItemStack leggings;
-	ItemStack boots;
-	ItemStack mainHand;
-	ItemStack offHand;
-}
 
 public class Monster {
 	private final String name;
@@ -23,7 +13,6 @@ public class Monster {
 	public Entity entity;
 	private final ForagingMonsterAggression aggression;
 	private final ForagingMonsterStats stats;
-	private MonsterEquipment equipment;
 	private Location spawnLocation;
 
 	public Monster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats) {
