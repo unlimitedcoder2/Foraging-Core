@@ -2,18 +2,26 @@ package me.tech.foraging.monsters;
 
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
 import me.tech.foraging.models.monsters.ForagingMonsterStats;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
+class MonsterEquipment {
+	ItemStack helmet;
+	ItemStack chestplate;
+	ItemStack leggings;
+	ItemStack boots;
+}
 
 public class Monster {
-	private String name;
-	private int level;
+	private final String name;
+	private final int level;
 	public Entity entity;
-	private ForagingMonsterAggression aggression;
-	private ForagingMonsterStats stats;
+	private final ForagingMonsterAggression aggression;
+	private final ForagingMonsterStats stats;
+	private MonsterEquipment equipment;
 	private Location spawnLocation;
 
 	public Monster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats) {
