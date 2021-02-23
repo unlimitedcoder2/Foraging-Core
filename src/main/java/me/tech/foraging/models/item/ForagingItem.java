@@ -47,7 +47,7 @@ public class ForagingItem {
 	public ItemStack getItem() {
 		ItemStack item = new ItemStack(this.itemStack);
 
-		String name = color(String.format("%s%s", this.rarity.getColor(), this.name));
+		String name = String.format("%s%s", this.rarity.getColor(), this.name);
 		List<String> lore = new ArrayList<>();
 		if(this.lore.size() != 0) {
 			for(String l : this.lore) {
@@ -57,6 +57,7 @@ public class ForagingItem {
 		}
 		lore.add(color(String.format("%s%s", this.rarity.getColor(), this.rarity.getName().toUpperCase())));
 
+		item.getItemMeta().setDisplayName(color(name));
 		item.setLore(lore);
 		return item;
 	}

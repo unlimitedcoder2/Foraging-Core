@@ -1,0 +1,10 @@
+items:
+  stick:
+    name: 'Cool Stick'
+    lore:
+      - 'Test'
+      - 'XD'
+    itemstack: 'STICK'
+    rarity: 'COMMON'
+    stats:
+      damage: 5

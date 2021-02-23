@@ -1,22 +1,25 @@
 package me.tech.foraging.items;
 
 import me.tech.foraging.Foraging;
-import static me.tech.foraging.utils.ChatUtils.broadcastMessage;
+import me.tech.foraging.models.item.ForagingItem;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.HashMap;
 
 public class ItemManager {
-	private final boolean devMode;
-	private Foraging foraging;
+	private final Foraging foraging;
+	private FileConfiguration itemsConfig;
+
+	public HashMap<String, ForagingItem> items = new HashMap<>();
 
 	public ItemManager(Foraging foraging) {
 		this.foraging = foraging;
-
-		this.devMode = this.foraging.getConfig().getBoolean("dev");
+		this.itemsConfig = this.foraging.getConfiguration("items");
 	}
 
 	public void initItems() {
-		if(this.devMode) {
-			return;
+		for(String item : this.itemsConfig.getStringList("items")) {
+
 		}
-		broadcastMessage(foraging, "Server is not in dev mode.");
 	}
 }
