@@ -1,5 +1,6 @@
 package me.tech.foraging.utils;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,5 +25,9 @@ public class ChatUtils {
 
 	public static void broadcastMessage(JavaPlugin plugin, String msg) {
 		broadcastMessage(plugin.getServer(), msg);
+	}
+
+	public static String color(String m) {
+		return ChatColor.translateAlternateColorCodes('&', m);
 	}
 }

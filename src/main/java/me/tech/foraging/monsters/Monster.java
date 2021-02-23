@@ -1,5 +1,6 @@
 package me.tech.foraging.monsters;
 
+import me.tech.foraging.Foraging;
 import me.tech.foraging.models.monsters.ForagingMonster;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
 import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
@@ -10,10 +11,12 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 public class Monster extends ForagingMonster {
+	private final Foraging foraging;
 	private Location spawnLocation;
 
-	public Monster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment) {
+	public Monster(Foraging foraging, String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment) {
 		super(name, level, aggression, stats, equipment);
+		this.foraging = foraging;
 	}
 
 	/**
@@ -44,6 +47,7 @@ public class Monster extends ForagingMonster {
 		if(loc.getWorld() == null) return false;
 		this.entity = loc.getWorld().spawnEntity(loc, entityType);
 
+		this.foraging.monsters.put(this.entity.getUniqueId(), this);
 		return true;
 	}
 }
