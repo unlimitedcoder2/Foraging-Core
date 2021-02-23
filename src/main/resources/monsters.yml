@@ -1,5 +1,6 @@
 monsters:
   zombie:
+    id: 'BASIC-ZOMBIE'
     name: 'Zombie'
     level: 1
     entity: 'ZOMBIE'
@@ -10,6 +11,7 @@ monsters:
       health: 20
       damage: 50
   skeleton:
+    id: 'BASIC-SKELETON'
     name: 'Skeleton'
     level: 1
     entity: 'SKELETON'
