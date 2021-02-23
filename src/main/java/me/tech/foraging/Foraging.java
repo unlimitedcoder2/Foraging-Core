@@ -2,11 +2,11 @@ package me.tech.foraging;
 
 import me.tech.foraging.items.ItemManager;
 import me.tech.foraging.models.player.ForagingPlayer;
+import me.tech.foraging.monsters.Monster;
 import me.tech.foraging.player.events.JoinEvent;
 import me.tech.foraging.player.events.QuitEvent;
 import me.tech.foraging.player.events.RegionEnterEvent;
 import me.tech.foraging.regions.RegionManager;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,9 +22,11 @@ public class Foraging extends JavaPlugin {
 	public ItemManager itemManager;
 	public RegionManager regionManager;
 	public PluginManager pluginManager = getServer().getPluginManager();
-	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 
+	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
+	public HashMap<UUID, Monster> monsters = new HashMap<>();
 	private final HashMap<String, FileConfiguration> configs = new HashMap<>();
+
 
 	@Override
 	public void onEnable() {

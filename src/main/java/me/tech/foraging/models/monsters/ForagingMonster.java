@@ -1,14 +1,17 @@
 package me.tech.foraging.models.monsters;
 
+import com.gmail.filoghost.holographicdisplays.api.Hologram;
 import org.bukkit.entity.Entity;
 
 public class ForagingMonster {
-	private String name;
-	private int level;
+	private final String name;
+	private final int level;
 	public Entity entity;
-	private ForagingMonsterAggression aggression;
-	private ForagingMonsterStats stats;
-	private ForagingMonsterEquipment equipment;
+	// Hologram above entity.
+	private Hologram hologram;
+	private final ForagingMonsterAggression aggression;
+	private final ForagingMonsterStats stats;
+	private final ForagingMonsterEquipment equipment;
 
 	public ForagingMonster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment) {
 		this.name = name;

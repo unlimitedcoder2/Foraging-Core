@@ -1,25 +1,19 @@
 package me.tech.foraging.monsters;
 
+import me.tech.foraging.models.monsters.ForagingMonster;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
+import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
 import me.tech.foraging.models.monsters.ForagingMonsterStats;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
-public class Monster {
-	private final String name;
-	private final int level;
-	public Entity entity;
-	private final ForagingMonsterAggression aggression;
-	private final ForagingMonsterStats stats;
+public class Monster extends ForagingMonster {
 	private Location spawnLocation;
 
-	public Monster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats) {
-		this.name = name;
-		this.level = level;
-		this.aggression = aggression;
-		this.stats = stats;
+	public Monster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment) {
+		super(name, level, aggression, stats, equipment);
 	}
 
 	/**
@@ -29,14 +23,13 @@ public class Monster {
 	 */
 	public Player searchForPlayers(int range) {
 		if(range > 128) return null;
-		if(this.aggression != ForagingMonsterAggression.AGGRESSIVE) return null;
+		if(this.getAggression() != ForagingMonsterAggression.AGGRESSIVE) return null;
 		if(this.entity == null) return null;
 
 		for(Entity e : this.entity.getNearbyEntities(range, 3, range)) {
 			if(!(e instanceof Player)) continue;
 			return (Player) e;
 		}
-
 		return null;
 	}
 
@@ -52,29 +45,5 @@ public class Monster {
 		this.entity = loc.getWorld().spawnEntity(loc, entityType);
 
 		return true;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public int getLevel() {
-		return this.level;
-	}
-
-	public ForagingMonsterAggression getAggression() {
-		return this.aggression;
-	}
-
-	public ForagingMonsterStats getStats() {
-		return this.stats;
-	}
-
-	public Entity getEntity() {
-		return this.entity;
-	}
-
-	public void setEntity(Entity entity) {
-		this.entity = entity;
 	}
 }
