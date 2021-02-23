@@ -2,4 +2,4 @@ name: Foraging
 main: me.tech.foraging.Foraging
 version: 1.0.0
 author: Tech
-depend: [HolographicDisplays, WorldGuard]
+depend: [HolographicDisplays, WorldGuard, WorldGuardEvents]
