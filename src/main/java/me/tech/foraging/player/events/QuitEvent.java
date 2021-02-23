@@ -6,14 +6,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 public class QuitEvent implements Listener {
-	private Foraging foraging;
+	private final Foraging foraging;
 
 	public QuitEvent(Foraging foraging) {
 		this.foraging = foraging;
 	}
 
 	@EventHandler
-	public void onPlayerQuit(PlayerQuitEvent e) {
-		this.foraging.players.remove(e.getPlayer().getUniqueId());
+	public void onPlayerQuit(PlayerQuitEvent ev) {
+		this.foraging.players.remove(ev.getPlayer().getUniqueId());
 	}
 }

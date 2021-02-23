@@ -9,25 +9,24 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinEvent implements Listener {
-	private Foraging foraging;
+	private final Foraging foraging;
 
 	public JoinEvent(Foraging foraging) {
 		this.foraging = foraging;
 	}
 
 	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent e) {
+	public void onPlayerJoin(PlayerJoinEvent ev) {
 		// Imaginary test data.
 		this.foraging.players.put(
-			e.getPlayer().getUniqueId(),
+			ev.getPlayer().getUniqueId(),
 			new ForagingPlayer(
-				e.getPlayer().getUniqueId(),
+				ev.getPlayer().getUniqueId(),
 				new ForagingPlayerStats(20, 5),
-				new SummonManager(e.getPlayer())
+				new SummonManager(ev.getPlayer())
 			)
 		);
 
-		ForagingPlayer player = this.foraging.players.get(e.getPlayer().getUniqueId());
-		player.getSummonManager();
+		ForagingPlayer player = this.foraging.players.get(ev.getPlayer().getUniqueId());
 	}
 }

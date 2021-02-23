@@ -9,15 +9,15 @@ import org.bukkit.event.Listener;
 import java.util.Set;
 
 public class RegionEnterEvent implements Listener {
-	private Foraging foraging;
+	private final Foraging foraging;
 
 	public RegionEnterEvent(Foraging foraging) {
 		this.foraging = foraging;
 	}
 
 	@EventHandler
-	public void onRegionEnter(RegionsChangedEvent e) {
-		Set<String> regions = e.getCurrentRegionsNames();
+	public void onRegionEnter(RegionsChangedEvent ev) {
+		Set<String> regions = ev.getCurrentRegionsNames();
 
 	}
 }

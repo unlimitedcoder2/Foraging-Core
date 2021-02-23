@@ -17,7 +17,6 @@ public class ItemManager {
 		if(this.devMode) {
 			return;
 		}
-
-		broadcastMessage(foraging, "not in dev.");
+		broadcastMessage(foraging, "Server is not in dev mode.");
 	}
 }
