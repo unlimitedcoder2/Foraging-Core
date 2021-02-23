@@ -82,8 +82,8 @@ public class Foraging extends JavaPlugin {
 				// is saying fuck that check so I'm going to believe it.
 				this.configs.remove(configName);
 				this.configs.put(configName, configuration);
-			} catch(IOException | InvalidConfigurationException e) {
-				e.printStackTrace();
+			} catch(IOException | InvalidConfigurationException ex) {
+				ex.printStackTrace();
 			}
 		}
 	}
