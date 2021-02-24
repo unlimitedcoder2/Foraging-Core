@@ -23,7 +23,7 @@ public class JoinEvent implements Listener {
 			new ForagingPlayer(
 				ev.getPlayer().getUniqueId(),
 				new ForagingPlayerStats(20, 5),
-				new SummonManager(ev.getPlayer())
+				new SummonManager(this.foraging, ev.getPlayer())
 			)
 		);
 

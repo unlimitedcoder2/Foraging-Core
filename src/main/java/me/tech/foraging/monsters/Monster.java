@@ -1,5 +1,8 @@
 package me.tech.foraging.monsters;
 
+import com.sk89q.worldedit.world.World;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.protection.managers.RegionManager;
 import me.tech.foraging.Foraging;
 import me.tech.foraging.models.monsters.ForagingMonster;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
@@ -50,8 +53,14 @@ public class Monster extends ForagingMonster {
 		this.entity = loc.getWorld().spawnEntity(loc, entityType);
 
 		this.spawnLocation = loc;
-
 		this.foraging.monsters.put(this.entity.getUniqueId(), this);
 		return true;
+	}
+
+	/**
+	 * @return Initial monster spawn location.
+	 */
+	public Location getSpawnLocation() {
+		return this.spawnLocation;
 	}
 }
