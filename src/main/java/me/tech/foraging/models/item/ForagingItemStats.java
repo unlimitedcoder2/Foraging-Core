@@ -1,14 +1,14 @@
 package me.tech.foraging.models.item;
 
 public class ForagingItemStats {
-	private float health = 0;
-	private float damage = 0;
+	private double health = 0;
+	private double damage = 0;
 
-	public ForagingItemStats(float health, float damage) {
+	public ForagingItemStats(double health, double damage) {
 		this.health = health;
 		this.damage = damage;
 	}
 
-	public float getHealth() { return this.health; }
-	public float getDamage() { return this.damage; }
+	public double getHealth() { return this.health; }
+	public double getDamage() { return this.damage; }
 }

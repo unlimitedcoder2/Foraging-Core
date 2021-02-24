@@ -2,7 +2,12 @@ package me.tech.foraging.items;
 
 import me.tech.foraging.Foraging;
 import me.tech.foraging.models.item.ForagingItem;
+import me.tech.foraging.models.item.ForagingItemRarity;
+import me.tech.foraging.models.item.ForagingItemStats;
+import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 
@@ -17,13 +22,23 @@ public class ItemManager {
 
 	public void initItems() {
 		FileConfiguration itemsConfig = this.foraging.getConfiguration("items");
-//		this.foraging.getLogger().info("Deep search.");
-//		this.foraging.getLogger().info(itemsConfig.getKeys(true).toString());
-//		this.foraging.getLogger().info("Not deep search.");
-//		this.foraging.getLogger().info(itemsConfig.getKeys(false).toString());
-		this.foraging.getLogger().info("doin key thingoay");
-		for(String item : itemsConfig.getConfigurationSection("items").getKeys(false)) {
-			this.foraging.getLogger().info(item);
+
+		for(String id : itemsConfig.getConfigurationSection("items").getKeys(false)) {
+			ConfigurationSection item = itemsConfig.getConfigurationSection(String.format("items.%s", id));
+
+			ForagingItem foragingItem = new ForagingItem(
+				item.getString("name"),
+				item.getStringList("lore"),
+				new ItemStack(Material.getMaterial(item.getString("itemstack"))),
+				ForagingItemRarity.COMMON,
+				new ForagingItemStats(
+					item.getDouble("stats.health"),
+					item.getDouble("stats.damage")
+				)
+			);
+
+			items.put(id, foragingItem);
+			this.foraging.getLogger().info(String.format("Created item %s", id));
 		}
 	}
 }
