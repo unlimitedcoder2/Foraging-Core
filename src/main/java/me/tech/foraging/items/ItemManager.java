@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class ItemManager {
 	private final Foraging foraging;
 
-	public HashMap<String, ForagingItem> items = new HashMap<>();
+	private HashMap<String, ForagingItem> items = new HashMap<>();
 
 	public ItemManager(Foraging foraging) {
 		this.foraging = foraging;
@@ -37,9 +37,12 @@ public class ItemManager {
 				)
 			);
 
-			items.put(id, foragingItem);
-			this.foraging.getLogger().info(String.format("Created item %s", id));
+			items.put(id.toLowerCase(), foragingItem);
 		}
+	}
+
+	public HashMap<String, ForagingItem> getItems() {
+		return this.items;
 	}
 }
 
