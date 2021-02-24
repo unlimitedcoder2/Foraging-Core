@@ -1,22 +1,18 @@
 package me.tech.foraging.models.player;
 
 import me.tech.foraging.player.SummonManager;
+import org.bukkit.Location;
 
-import java.util.UUID;
+import java.util.List;
 
 public class ForagingPlayer {
-	private final UUID uuid;
 	private final ForagingPlayerStats stats;
 	private final SummonManager summonManager;
+	public List<Location> validSpawnLocations;
 
-	public ForagingPlayer(UUID uuid, ForagingPlayerStats stats, SummonManager summonManager) {
-		this.uuid = uuid;
+	public ForagingPlayer(ForagingPlayerStats stats, SummonManager summonManager) {
 		this.stats = stats;
 		this.summonManager = summonManager;
-	}
-
-	public UUID getUUID() {
-		return this.uuid;
 	}
 
 	public ForagingPlayerStats getStats() {
@@ -25,5 +21,9 @@ public class ForagingPlayer {
 
 	public SummonManager getSummonManager() {
 		return this.summonManager;
+	}
+
+	public List<Location> getValidSpawnLocations() {
+		return this.validSpawnLocations;
 	}
 }
