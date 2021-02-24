@@ -8,3 +8,6 @@ commands:
     usage: cool
   giveitem:
     usage: giveitem
+  reloadconfigs:
+    usage: reloadconfigs
+    aliases: ['reloadconfig']

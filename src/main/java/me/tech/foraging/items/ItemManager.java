@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class ItemManager {
 	private final Foraging foraging;
 
-	private HashMap<String, ForagingItem> items = new HashMap<>();
+	private final HashMap<String, ForagingItem> items = new HashMap<>();
 
 	public ItemManager(Foraging foraging) {
 		this.foraging = foraging;
