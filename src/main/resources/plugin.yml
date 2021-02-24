@@ -4,8 +4,6 @@ version: 1.0.0
 author: Tech
 depend: [HolographicDisplays, WorldGuard, WorldGuardEvents]
 commands:
-  cool:
-    usage: cool
   giveitem:
     usage: giveitem
   reloadconfigs:
