@@ -3,6 +3,7 @@ lang:
   core:
     invalidPermissions: '&cYou are lacking the required permissions to execute this command.'
     invalidPlayer: '&cSorry! That player is currently offline.'
+    reloadConfigurations: '&aSuccessfully reloaded all configurations.'
   commands:
     giveitem:
       usage: '&cUsage: /giveitem <player> <id> <amount>.'

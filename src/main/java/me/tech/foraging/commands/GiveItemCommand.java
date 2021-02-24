@@ -27,36 +27,35 @@ public class GiveItemCommand implements CommandExecutor {
 		Player player = (Player) commandSender;
 
 		if(!player.hasPermission("core.giveitem")) {
-			player.sendMessage(color(this.foraging.getConfiguration("config").getString("lang.core.invalidPermissions")));
+			player.sendMessage(this.foraging.getLangManager().getMSG("core.invalidPermissions"));
 			return true;
 		}
 
 		if(strings.length < 2) {
-			player.sendMessage(color(this.foraging.getConfiguration("config").getString("lang.commands.giveitem.usage")));
+			player.sendMessage(this.foraging.getLangManager().getMSG("commands.giveitem.usage"));
 			return true;
 		}
 
 		Player receiver = Bukkit.getPlayer(strings[0]);
 		if(receiver == null) {
-			player.sendMessage(color(this.foraging.getConfiguration("config").getString("lang.core.invalidPlayer")));
+			player.sendMessage(this.foraging.getLangManager().getMSG("core.invalidPlayer"));
 			return true;
 		}
 		String itemID = strings[1].toLowerCase();
 
 		if(!this.itemManager.getItems().containsKey(itemID)) {
-			player.sendMessage(color(this.foraging.getConfiguration("config").getString("lang.commands.giveitem.invalidItem")));
+			player.sendMessage(this.foraging.getLangManager().getMSG("commands.giveitem.invalidItem"));
 			return true;
 		}
 
 		ForagingItem item = this.itemManager.getItems().get(itemID);
-		String itemName = String.format("%s%s", item.getRarity().getBoldColor(), item.getName());
+		String itemName = color(String.format("%s%s", item.getRarity().getBoldColor(), item.getName()));
 
 		receiver.getInventory().addItem(item.getItem());
-		player.sendMessage(color(
-			this.foraging.getConfiguration("config").getString("lang.commands.giveitem.gaveItem")
+		player.sendMessage(this.foraging.getLangManager().getMSG("commands.giveitem.gaveItem")
 			.replace("{receiver}", receiver.getName())
 			.replace("{itemName}", itemName)
-		));
+		);
 		return true;
 	}
 }

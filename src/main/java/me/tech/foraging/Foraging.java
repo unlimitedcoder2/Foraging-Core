@@ -14,6 +14,7 @@ import me.tech.foraging.player.events.JoinEvent;
 import me.tech.foraging.player.events.QuitEvent;
 import me.tech.foraging.player.events.RegionEnterEvent;
 import me.tech.foraging.regions.RegionManager;
+import me.tech.foraging.utils.LangManager;
 import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -33,6 +34,7 @@ public class Foraging extends JavaPlugin {
 	public ItemManager itemManager;
 	public RegionManager regionManager;
 	public PluginManager pluginManager = getServer().getPluginManager();
+	public LangManager langManager;
 
 	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 	public HashMap<UUID, Monster> monsters = new HashMap<>();
@@ -137,6 +139,10 @@ public class Foraging extends JavaPlugin {
 		this.itemManager.initItems();
 
 		this.regionManager = new RegionManager(this);
+
+		this.langManager = new LangManager(this);
+		this.langManager.initMessages();
+
 		this.getLogger().info("Reloaded configurations!");
 	}
 
@@ -149,7 +155,18 @@ public class Foraging extends JavaPlugin {
 		// Just return main config.
 		if(name.equalsIgnoreCase("config")) return this.getConfig();
 		// Check to make sure the config is actually added.
-		if(this.configs.containsKey(name)) return this.configs.get(name);
-		else return null;
+		return this.configs.getOrDefault(name, null);
+	}
+
+	public LangManager getLangManager() {
+		return this.langManager;
+	}
+
+	public ItemManager getItemManager() {
+		return this.itemManager;
+	}
+
+	public RegionManager getRegionManager() {
+		return this.regionManager;
 	}
 }
