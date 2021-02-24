@@ -6,3 +6,5 @@ depend: [HolographicDisplays, WorldGuard, WorldGuardEvents]
 commands:
   cool:
     usage: cool
+  giveitem:
+    usage: giveitem

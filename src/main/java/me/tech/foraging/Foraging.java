@@ -1,5 +1,6 @@
 package me.tech.foraging;
 
+import me.tech.foraging.commands.GiveItemCommand;
 import me.tech.foraging.commands.cooltest;
 import me.tech.foraging.items.ItemManager;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
@@ -51,8 +52,10 @@ public class Foraging extends JavaPlugin {
 		this.initEvents();
 
 		this.itemManager = new ItemManager(this);
+		this.itemManager.initItems();
+
 		this.regionManager = new RegionManager(this);
-	
+
 		List<String> drops = new ArrayList<>();
 		
 		Zombie testZombie = new Zombie(
@@ -85,6 +88,7 @@ public class Foraging extends JavaPlugin {
 	 */
 	private void initCommands() {
 		getCommand("cool").setExecutor(new cooltest(this));
+		getCommand("giveitem").setExecutor(new GiveItemCommand(this, this.itemManager));
 	}
 
 	/**
