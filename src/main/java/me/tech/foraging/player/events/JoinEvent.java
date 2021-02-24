@@ -21,12 +21,12 @@ public class JoinEvent implements Listener {
 		this.foraging.players.put(
 			ev.getPlayer().getUniqueId(),
 			new ForagingPlayer(
-				ev.getPlayer().getUniqueId(),
 				new ForagingPlayerStats(20, 5),
 				new SummonManager(this.foraging, ev.getPlayer())
 			)
 		);
 
 		ForagingPlayer player = this.foraging.players.get(ev.getPlayer().getUniqueId());
+		player.getSummonManager().spawnMobs();
 	}
 }
