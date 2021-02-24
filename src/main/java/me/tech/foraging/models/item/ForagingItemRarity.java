@@ -16,6 +16,10 @@ public enum ForagingItemRarity {
 		this.color = color;
 	}
 
+	/** @return Rarity name. */
 	public String getName() { return name; }
+	/** @return Rarity colorcode. */
 	public String getColor() { return color; }
+	/** @return Rarity colorcode in bold. */
+	public String getBoldColor() { return color+"&l"; }
 }

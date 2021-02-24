@@ -4,6 +4,7 @@ import static me.tech.foraging.utils.ChatUtils.color;
 
 import me.tech.foraging.Foraging;
 import me.tech.foraging.items.ItemManager;
+import me.tech.foraging.models.item.ForagingItem;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -40,15 +41,22 @@ public class GiveItemCommand implements CommandExecutor {
 			player.sendMessage(color(this.foraging.getConfiguration("config").getString("lang.core.invalidPlayer")));
 			return true;
 		}
+		String itemID = strings[1].toLowerCase();
 
-		this.foraging.getLogger().info(strings[1]);
-		if(this.itemManager.items.containsKey(strings[1])) {
-			receiver.getInventory().addItem(this.itemManager.items.get(strings[1]).getItem());
-			receiver.sendMessage(String.format("You got %s!", strings[1]));
-		} else {
-			player.sendMessage("Invalid item?");
+		if(!this.itemManager.getItems().containsKey(itemID)) {
+			player.sendMessage(color(this.foraging.getConfiguration("config").getString("lang.commands.giveitem.invalidItem")));
+			return true;
 		}
 
+		ForagingItem item = this.itemManager.getItems().get(itemID);
+		String itemName = String.format("%s%s", item.getRarity().getBoldColor(), item.getName());
+
+		receiver.getInventory().addItem(item.getItem());
+		player.sendMessage(color(
+			this.foraging.getConfiguration("config").getString("lang.commands.giveitem.gaveItem")
+			.replace("{receiver}", receiver.getName())
+			.replace("{itemName}", itemName)
+		));
 		return true;
 	}
 }

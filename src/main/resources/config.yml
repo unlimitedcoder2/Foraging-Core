@@ -6,3 +6,5 @@ lang:
   commands:
     giveitem:
       usage: '&cUsage: /giveitem <player> <id> <amount>.'
+      invalidItem: '&cSorry! That''s not a valid item id.'
+      gaveItem: '&aYou have given &f{receiver}&r &aa &r{itemName}&a.'
