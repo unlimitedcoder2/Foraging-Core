@@ -1,8 +1,5 @@
 package me.tech.foraging.monsters;
 
-import com.sk89q.worldedit.world.World;
-import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.protection.managers.RegionManager;
 import me.tech.foraging.Foraging;
 import me.tech.foraging.models.monsters.ForagingMonster;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
