@@ -41,7 +41,13 @@ public class GiveItemCommand implements CommandExecutor {
 			return true;
 		}
 
-
+		this.foraging.getLogger().info(strings[1]);
+		if(this.itemManager.items.containsKey(strings[1])) {
+			receiver.getInventory().addItem(this.itemManager.items.get(strings[1]).getItem());
+			receiver.sendMessage(String.format("You got %s!", strings[1]));
+		} else {
+			player.sendMessage("Invalid item?");
+		}
 
 		return true;
 	}

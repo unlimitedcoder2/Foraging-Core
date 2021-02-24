@@ -46,15 +46,18 @@ public class Foraging extends JavaPlugin {
 
 			return;
 		}
-		// Initialize everything pls
+		// Initialize configurations.
 		this.initConfigs();
-		this.initCommands();
-		this.initEvents();
 
 		this.itemManager = new ItemManager(this);
 		this.itemManager.initItems();
 
 		this.regionManager = new RegionManager(this);
+
+		// Initialize commands / events after because
+		// some systems need the managers to be setup first.
+		this.initCommands();
+		this.initEvents();
 
 		List<String> drops = new ArrayList<>();
 		
