@@ -8,18 +8,35 @@ import java.util.HashMap;
 
 public class ItemManager {
 	private final Foraging foraging;
-	private FileConfiguration itemsConfig;
 
 	public HashMap<String, ForagingItem> items = new HashMap<>();
 
 	public ItemManager(Foraging foraging) {
 		this.foraging = foraging;
-		this.itemsConfig = this.foraging.getConfiguration("items");
 	}
 
 	public void initItems() {
-		for(String item : this.itemsConfig.getStringList("items")) {
-
+		FileConfiguration itemsConfig = this.foraging.getConfiguration("items");
+//		this.foraging.getLogger().info("Deep search.");
+//		this.foraging.getLogger().info(itemsConfig.getKeys(true).toString());
+//		this.foraging.getLogger().info("Not deep search.");
+//		this.foraging.getLogger().info(itemsConfig.getKeys(false).toString());
+		this.foraging.getLogger().info("doin key thingoay");
+		for(String item : itemsConfig.getConfigurationSection("items").getKeys(false)) {
+			this.foraging.getLogger().info(item);
 		}
 	}
 }
+
+/*
+items:
+  stick:
+    name: 'Cool Stick'
+    lore:
+      - 'Test'
+      - 'XD'
+    itemstack: 'STICK'
+    rarity: 'COMMON'
+    stats:
+      damage: 5
+ */
