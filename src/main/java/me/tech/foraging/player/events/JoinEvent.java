@@ -26,7 +26,9 @@ public class JoinEvent implements Listener {
 			)
 		);
 
-		ForagingPlayer player = this.foraging.players.get(ev.getPlayer().getUniqueId());
-		player.getSummonManager().spawnMobs();
+		ForagingPlayer foragingPlayer = this.foraging.players.get(ev.getPlayer().getUniqueId());
+		// extremely hot.
+		foragingPlayer.getSummonManager().setForagingPlayer(foragingPlayer);
+		foragingPlayer.getSummonManager().spawnMobs();
 	}
 }

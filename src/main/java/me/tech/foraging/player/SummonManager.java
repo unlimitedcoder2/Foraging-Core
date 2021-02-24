@@ -11,7 +11,7 @@ import org.bukkit.util.Vector;
 
 public class SummonManager {
 	private final Foraging foraging;
-	private final ForagingPlayer foragingPlayer;
+	private ForagingPlayer foragingPlayer;
 	private final Player player;
 
 	private BukkitTask locationChecker;
@@ -19,7 +19,6 @@ public class SummonManager {
 	public SummonManager(Foraging foraging, Player player) {
 		this.foraging = foraging;
 		this.player = player;
-		this.foragingPlayer = foraging.players.get(player.getUniqueId());
 	}
 
 	/**
@@ -72,9 +71,9 @@ public class SummonManager {
 		if(loc.getBlock().isLiquid() || loc.getBlock().getType() == Material.AIR) return false;
 		return true;
 	}
-	
-	public Player getPlayer() {
-		return this.player;
+
+	public void setForagingPlayer(ForagingPlayer foragingPlayer) {
+		this.foragingPlayer = foragingPlayer;
 	}
 
 	public BukkitTask getLocationChecker() {
