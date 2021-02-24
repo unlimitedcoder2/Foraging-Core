@@ -1,5 +1,6 @@
 package me.tech.foraging;
 
+import me.tech.foraging.commands.cooltest;
 import me.tech.foraging.items.ItemManager;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
 import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
@@ -82,7 +83,9 @@ public class Foraging extends JavaPlugin {
 	/**
 	 * Initialize all commands.
 	 */
-	private void initCommands() { }
+	private void initCommands() {
+		getCommand("cool").setExecutor(new cooltest(this));
+	}
 
 	/**
 	 * Initialize all events.
