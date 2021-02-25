@@ -1,0 +1,91 @@
+package me.tech.foraging.database;
+
+import me.tech.foraging.Foraging;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
+
+import java.io.File;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Database {
+	private final Foraging foraging;
+	private String databaseType;
+	private Connection connection;
+
+	public Database(Foraging foraging) {
+		this.foraging = foraging;
+	}
+
+	/**
+	 * Establish a connection with the database of choice.
+	 * @throws InvalidConfigurationException
+	 */
+	public void establishConnection() {
+		this.databaseType = this.foraging.getConfig().getString("db.type");
+
+		try {
+			if(this.databaseType.equalsIgnoreCase("MySQL"))
+				this.createMySQL();
+			else if(this.databaseType.equalsIgnoreCase("SQLite"))
+				this.createSQLite();
+			else {
+				this.createSQLite();
+				this.foraging.getLogger().severe(String.format("An invalid database type of '%s' was set, defaulting to SQLite.", this.databaseType));
+			}
+		} catch(SQLException ex) { ex.printStackTrace(); }
+	}
+
+	/**
+	 * Create a connection to the MySQL database.
+	 * @throws SQLException
+	 */
+	private void createMySQL() throws SQLException {
+		ConfigurationSection dbConfig = this.foraging.getConfig().getConfigurationSection("db");
+		// magik
+		String host = dbConfig.getString("host");
+		int port = dbConfig.getInt("port");
+		String dbName = dbConfig.getString("name");
+		String username = dbConfig.getString("username");
+		String password = dbConfig.getString("password");
+
+		this.connection = DriverManager.getConnection(
+			String.format("jdbc:mysql://%s:%d/%s?user=%s&password=%s", host, port, dbName, username, password)
+		);
+	}
+
+	/**
+	 * Create a SQLite database if not already created.
+	 * @throws SQLException
+	 */
+	private void createSQLite() throws SQLException {
+		// Name of database file.
+		String dbFileName = this.foraging.getConfig().getString("db.file");
+		if(dbFileName == null) dbFileName = "foraging.db";
+
+		File dbFile = new File(this.foraging.getDataFolder(), dbFileName);
+		// Check to see if a SQLite database already exists.
+		if(!dbFile.exists()) {
+			// Save foraging.db from plugins resource folder to data folder.
+			this.foraging.saveResource("foraging.db", true);
+			dbFile = new File(this.foraging.getDataFolder(), "foraging.db");
+			// File name is automatically set to foraging.db so
+			// it being renamed to itself is fine.
+			File newFileName = new File(this.foraging.getDataFolder(), dbFileName);
+			dbFile.renameTo(newFileName);
+		}
+
+		this.connection = DriverManager.getConnection(
+			String.format("jdbc:sqlite:%s/%s", this.foraging.getDataFolder(), dbFileName)
+		);
+	}
+
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public String getDatabaseType() {
+		return databaseType;
+	}
+}
