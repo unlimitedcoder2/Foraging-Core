@@ -34,6 +34,7 @@ public class Foraging extends JavaPlugin {
 	public RegionManager regionManager;
 	public PluginManager pluginManager = getServer().getPluginManager();
 	public LangManager langManager;
+	public DatabaseHandler databaseHandler;
 
 	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 	public HashMap<UUID, Monster> monsters = new HashMap<>();
@@ -141,6 +142,9 @@ public class Foraging extends JavaPlugin {
 
 		this.langManager = new LangManager(this);
 		this.langManager.initMessages();
+
+		this.databaseHandler = new DatabaseHandler(this);
+		this.databaseHandler.establishConnection();
 
 		this.getLogger().info("Reloaded configurations!");
 	}
