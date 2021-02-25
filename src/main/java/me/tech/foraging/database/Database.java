@@ -1,6 +1,9 @@
 package me.tech.foraging.database;
 
 import me.tech.foraging.Foraging;
+import me.tech.foraging.database.repos.PlayerRepo;
+import me.tech.foraging.database.repos.SkillsRepo;
+import me.tech.foraging.database.repos.StatsRepo;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 
@@ -14,8 +17,16 @@ public class Database {
 	private String databaseType;
 	private Connection connection;
 
+	private PlayerRepo playerRepo;
+	private SkillsRepo skillsRepo;
+	private StatsRepo statsRepo;
+
 	public Database(Foraging foraging) {
 		this.foraging = foraging;
+
+		this.playerRepo = new PlayerRepo(foraging, this);
+		this.skillsRepo = new SkillsRepo(foraging, this);
+		this.statsRepo = new StatsRepo(foraging, this);
 	}
 
 	/**
@@ -87,5 +98,13 @@ public class Database {
 
 	public String getDatabaseType() {
 		return databaseType;
+	}
+
+	public PlayerRepo getPlayerRepo() {
+		return playerRepo;
+	}
+
+	public SkillsRepo getSkillsRepo() {
+		return skillsRepo;
 	}
 }

@@ -9,6 +9,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import java.sql.SQLException;
+
 public class JoinEvent implements Listener {
 	private final Foraging foraging;
 
@@ -32,5 +34,11 @@ public class JoinEvent implements Listener {
 		// extremely hot.
 		foragingPlayer.getSummonManager().setForagingPlayer(foragingPlayer);
 		foragingPlayer.getSummonManager().spawnMobs();
+
+		try {
+			this.foraging.getDatabase().getPlayerRepo().createPlayer(ev.getPlayer());
+		} catch(SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 }
