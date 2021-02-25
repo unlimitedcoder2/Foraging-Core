@@ -16,7 +16,7 @@ public class DatabaseHandler {
 		this.foraging = foraging;
 	}
 
-	public void establishConnection() throws InvalidConfigurationException {
+	public void establishConnection() {
 		String dbType = this.foraging.getConfig().getString("db.type");
 
 		try {
@@ -63,6 +63,7 @@ public class DatabaseHandler {
 			// Rename foraging.db to whatever db.file is, if it's foraging.db
 			// it will just rename to the same file.
 			File newName = new File(this.foraging.getDataFolder(), dbFileName);
+			//noinspection ResultOfMethodCallIgnored
 			dbFile.renameTo(newName);
 		}
 		// Establish the connection with sqlite.

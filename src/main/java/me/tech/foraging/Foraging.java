@@ -141,12 +141,8 @@ public class Foraging extends JavaPlugin {
 		this.langManager = new LangManager(this);
 		this.langManager.initMessages();
 
-		try {
-			this.databaseHandler = new DatabaseHandler(this);
-			this.databaseHandler.establishConnection();
-		} catch(InvalidConfigurationException ex) {
-			this.getLogger().severe("Invalid database type set, defaulting to SQLite.");
-		}
+		this.databaseHandler = new DatabaseHandler(this);
+		this.databaseHandler.establishConnection();
 
 		this.getLogger().info("Reloaded configurations!");
 	}
