@@ -2,6 +2,8 @@ package me.tech.foraging.database.repos;
 
 import me.tech.foraging.Foraging;
 import me.tech.foraging.database.Database;
+import me.tech.foraging.models.database.DBSkills;
+import me.tech.foraging.models.database.DBStats;
 import org.bukkit.entity.Player;
 
 import java.sql.Connection;
