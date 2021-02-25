@@ -1,4 +1,13 @@
 dev: false
+db:
+  type: 'SQLite'
+  name: ''
+  username: ''
+  password: ''
+  host: ''
+  port: 3000
+  # If using SQLite.
+  file: 'foraging.db'
 lang:
   core:
     invalidPermissions: '&cYou are lacking the required permissions to execute this command.'

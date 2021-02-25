@@ -1,8 +1,10 @@
 package me.tech.foraging;
 
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
+
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -14,48 +16,58 @@ public class DatabaseHandler {
 		this.foraging = foraging;
 	}
 
-	public void establishConnection() {
-		// If a database doesn't exist create one.
-		if(!this.databaseExists()) {
-			try { this.createDatabase(); }
-			catch(SQLException ex) {
-				ex.printStackTrace();
-				return;
-			}
-		}
-		// Establish new connection to database.
-		try {
-			String url = String.format("jdbc:sqlite:%s/foraging.db", this.foraging.getDataFolder());
+	public void establishConnection() throws InvalidConfigurationException {
+		String dbType = this.foraging.getConfig().getString("db.type");
 
-			this.connection = DriverManager.getConnection(url);
-			this.foraging.getLogger().info("Established connection with database.");
+		try {
+			switch(dbType.toLowerCase()) {
+				case "mysql":
+					this.establishMySQLConnection();
+					break;
+				case "sqlite":
+				default:
+					this.establishSQLiteConnection();
+					dbType = "SQLite";
+			}
+
+			this.foraging.getLogger().info(String.format("Established connection with %s database.", dbType));
 		} catch(SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	/**
-	 * Creates a new SQLite database.
-	 */
-	private void createDatabase() throws SQLException {
-		String url = String.format("jdbc:sqlite:%s/foraging.db", this.foraging.getDataFolder());
-		Connection conn = null;
-		DatabaseMetaData meta = null;
+	private void establishMySQLConnection() throws SQLException {
+		ConfigurationSection dbConfig = foraging.getConfig().getConfigurationSection("db");
+		String host = dbConfig.getString("host");
+		int port = dbConfig.getInt("port");
+		String dbName = dbConfig.getString("name");
+		String username = dbConfig.getString("username");
+		String password = dbConfig.getString("password");
 
-		conn = DriverManager.getConnection(url);
-		if(conn != null) {
-			meta = conn.getMetaData();
-			this.foraging.getLogger().info(String.format("%s was created.", meta.getDriverName()));
-		} else throw new SQLException("Connection was null.");
-		conn.close();
+		this.connection = DriverManager.getConnection(
+			String.format("jdbc:mysql://%s:%d/%s?user=%s&password=%s", host, port, dbName, username, password)
+		);
 	}
 
-	/**
-	 * @return If the database exists.
-	 */
-	private boolean databaseExists() {
-		File file = new File(this.foraging.getDataFolder(), "foraging.db");
-		return file.exists();
+	private void establishSQLiteConnection() throws SQLException {
+		// Establish new connection to database.
+		String dbFileName = this.foraging.getConfig().getString("db.file");
+		if(dbFileName == null) dbFileName = "foraging.db";
+
+		File dbFile = new File(this.foraging.getDataFolder(), dbFileName);
+		// Check to see if SQLite DB File is created.
+		if(!dbFile.exists()) {
+			this.foraging.saveResource("foraging.db", false);
+			// Set DB File to foraging.db.
+			dbFile = new File(this.foraging.getDataFolder(), "foraging.db");
+			// Rename foraging.db to whatever db.file is, if it's foraging.db
+			// it will just rename to the same file.
+			File newName = new File(this.foraging.getDataFolder(), dbFileName);
+			dbFile.renameTo(newName);
+		}
+		// Establish the connection with sqlite.
+		String url = String.format("jdbc:sqlite:%s/%s", this.foraging.getDataFolder(), dbFileName);
+		this.connection = DriverManager.getConnection(url);
 	}
 
 	public Connection getConnection() {

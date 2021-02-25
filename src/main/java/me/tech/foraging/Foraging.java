@@ -22,8 +22,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import javax.naming.ConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -118,10 +120,6 @@ public class Foraging extends JavaPlugin {
 			FileConfiguration configuration = new YamlConfiguration();
 			try {
 				configuration.load(file);
-				// I want to add a check here to make sure
-				// the hashmap actually contains this config but IntellIJ
-				// is saying fuck that check so I'm going to believe it.
-				this.configs.remove(configName);
 				this.configs.put(configName, configuration);
 			} catch(IOException | InvalidConfigurationException ex) {
 				ex.printStackTrace();
@@ -143,8 +141,12 @@ public class Foraging extends JavaPlugin {
 		this.langManager = new LangManager(this);
 		this.langManager.initMessages();
 
-		this.databaseHandler = new DatabaseHandler(this);
-		this.databaseHandler.establishConnection();
+		try {
+			this.databaseHandler = new DatabaseHandler(this);
+			this.databaseHandler.establishConnection();
+		} catch(InvalidConfigurationException ex) {
+			this.getLogger().severe("Invalid database type set, defaulting to SQLite.");
+		}
 
 		this.getLogger().info("Reloaded configurations!");
 	}
