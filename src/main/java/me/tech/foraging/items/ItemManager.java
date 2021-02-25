@@ -34,7 +34,8 @@ public class ItemManager {
 				ForagingItemRarity.valueOf(item.getString("rarity").toUpperCase()),
 				new ForagingItemStats(
 					item.getDouble("stats.health"),
-					item.getDouble("stats.damage")
+					item.getDouble("stats.damage"),
+					item.getDouble("stats.weight")
 				)
 			);
 
