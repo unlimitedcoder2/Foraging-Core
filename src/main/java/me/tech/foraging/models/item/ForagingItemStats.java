@@ -9,6 +9,6 @@ public class ForagingItemStats {
 		this.damage = damage;
 	}
 
-	public double getHealth() { return this.health; }
-	public double getDamage() { return this.damage; }
+	public double getHealth() { return health; }
+	public double getDamage() { return damage; }
 }

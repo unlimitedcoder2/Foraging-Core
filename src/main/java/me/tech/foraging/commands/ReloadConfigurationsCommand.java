@@ -24,13 +24,14 @@ public class ReloadConfigurationsCommand implements CommandExecutor {
 			return true;
 		}
 		Player player = (Player) commandSender;
+
 		if(!player.hasPermission("core.admin")) {
-			player.sendMessage(this.foraging.getLangManager().getMSG("core.noPermission"));
+			player.sendMessage(this.foraging.getLangManager().getMSG("core.invalidPermissions"));
 			return true;
 		}
 
+		player.sendMessage(this.foraging.getLangManager().getMSG("commands.reloadconfigurations.success"));
 		this.foraging.reloadConfigurations();
-		player.sendMessage(this.foraging.getLangManager().getMSG("core.reloadConfigurations"));
 		return true;
 	}
 }

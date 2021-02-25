@@ -7,24 +7,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ForagingPlayer {
-	private final ForagingPlayerStats stats;
+	private ForagingPlayerStats stats;
+	private ForagingPlayerSkills skills;
 	private final SummonManager summonManager;
 	public List<Location> validSpawnLocations = new ArrayList<>();
 
-	public ForagingPlayer(ForagingPlayerStats stats, SummonManager summonManager) {
+	public ForagingPlayer(ForagingPlayerStats stats, ForagingPlayerSkills skills, SummonManager summonManager) {
 		this.stats = stats;
+		this.skills = skills;
 		this.summonManager = summonManager;
 	}
 
 	public ForagingPlayerStats getStats() {
-		return this.stats;
+		return stats;
+	}
+
+	public ForagingPlayerSkills getSkills() {
+		return skills;
 	}
 
 	public SummonManager getSummonManager() {
-		return this.summonManager;
+		return summonManager;
 	}
 
 	public List<Location> getValidSpawnLocations() {
-		return this.validSpawnLocations;
+		return validSpawnLocations;
 	}
 }

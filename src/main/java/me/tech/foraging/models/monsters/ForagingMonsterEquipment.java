@@ -20,26 +20,26 @@ public class ForagingMonsterEquipment {
 	}
 
 	public ItemStack getHelmet() {
-		return this.helmet;
+		return helmet;
 	}
 
 	public ItemStack getChestplate() {
-		return this.chestplate;
+		return chestplate;
 	}
 
 	public ItemStack getLeggings() {
-		return this.leggings;
+		return leggings;
 	}
 
 	public ItemStack getBoots() {
-		return this.boots;
+		return boots;
 	}
 
 	public ItemStack getMainHand() {
-		return this.mainHand;
+		return mainHand;
 	}
 
 	public ItemStack getOffHand() {
-		return this.offHand;
+		return offHand;
 	}
 }

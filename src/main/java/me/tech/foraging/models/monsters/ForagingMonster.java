@@ -26,19 +26,19 @@ public class ForagingMonster {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public int getLevel() {
-		return this.level;
+		return level;
 	}
 
 	public Entity getEntity() {
-		return this.entity;
+		return entity;
 	}
 
 	public Hologram getHologram() {
-		return this.hologram;
+		return hologram;
 	}
 
 	public void setHologram(Hologram hologram) {
@@ -46,18 +46,18 @@ public class ForagingMonster {
 	}
 
 	public ForagingMonsterAggression getAggression() {
-		return this.aggression;
+		return aggression;
 	}
 
 	public ForagingMonsterStats getStats() {
-		return this.stats;
+		return stats;
 	}
 
 	public ForagingMonsterEquipment getEquipment() {
-		return this.equipment;
+		return equipment;
 	}
 
 	public List<String> getDrops() {
-		return this.drops;
+		return drops;
 	}
 }

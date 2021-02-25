@@ -10,10 +10,18 @@ public class ForagingRegion {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public boolean isSafezone() {
-		return this.safezone;
+		return safezone;
+	}
+
+	public void setSafezone(boolean safezone) {
+		this.safezone = safezone;
 	}
 }

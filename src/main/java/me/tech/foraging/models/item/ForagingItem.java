@@ -22,23 +22,23 @@ public class ForagingItem {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public List<String> getLore() {
-		return this.lore;
+		return lore;
 	}
 
 	public ItemStack getItemStack() {
-		return this.itemStack;
+		return itemStack;
 	}
 
 	public ForagingItemRarity getRarity() {
-		return this.rarity;
+		return rarity;
 	}
 
 	public ForagingItemStats getStats() {
-		return this.stats;
+		return stats;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class ForagingItem {
 			}
 			lore.add("");
 		}
-		lore.add(color(String.format("%s%s", this.rarity.getColor(), this.rarity.getName().toUpperCase())));
+		lore.add(color(String.format("%s%s", this.rarity.getBoldColor(), this.rarity.getName().toUpperCase())));
 
 		item.getItemMeta().setDisplayName(color(name));
 		item.setLore(lore);

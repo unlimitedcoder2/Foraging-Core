@@ -10,10 +10,10 @@ public class ForagingPlayerStats {
 	}
 
 	public float getHealth() {
-		return this.health;
+		return health;
 	}
 
 	public float getDamage() {
-		return this.damage;
+		return damage;
 	}
 }

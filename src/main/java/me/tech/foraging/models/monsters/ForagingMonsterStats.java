@@ -10,10 +10,18 @@ public class ForagingMonsterStats {
 	}
 
 	public float getDamage() {
-		return this.damage;
+		return damage;
+	}
+
+	public void setDamage(float damage) {
+		this.damage = damage;
 	}
 
 	public float getHealth() {
-		return this.health;
+		return health;
+	}
+
+	public void setHealth(float health) {
+		this.health = health;
 	}
 }

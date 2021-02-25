@@ -58,6 +58,6 @@ public class Monster extends ForagingMonster {
 	 * @return Initial monster spawn location.
 	 */
 	public Location getSpawnLocation() {
-		return this.spawnLocation;
+		return spawnLocation;
 	}
 }

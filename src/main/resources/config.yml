@@ -9,3 +9,8 @@ lang:
       usage: '&cUsage: /giveitem <player> <id> <amount>.'
       invalidItem: '&cSorry! That''s not a valid item id.'
       gaveItem: '&aYou have given &f{receiver}&r &aa &r{itemName}&a.'
+    reloadconfigurations:
+      success: '&aSuccessfully reloaded all configurations.'
+  player:
+    join: '&f{player}&r &ehas joined the game.'
+    quit: '&f{player}&r &ehas left the game.'

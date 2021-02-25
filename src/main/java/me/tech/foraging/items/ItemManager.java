@@ -30,7 +30,8 @@ public class ItemManager {
 				item.getString("name"),
 				item.getStringList("lore"),
 				new ItemStack(Material.getMaterial(item.getString("itemstack"))),
-				ForagingItemRarity.COMMON,
+				/* For now every item is common. */
+				ForagingItemRarity.valueOf(item.getString("rarity").toUpperCase()),
 				new ForagingItemStats(
 					item.getDouble("stats.health"),
 					item.getDouble("stats.damage")
@@ -42,19 +43,6 @@ public class ItemManager {
 	}
 
 	public HashMap<String, ForagingItem> getItems() {
-		return this.items;
+		return items;
 	}
 }
-
-/*
-items:
-  stick:
-    name: 'Cool Stick'
-    lore:
-      - 'Test'
-      - 'XD'
-    itemstack: 'STICK'
-    rarity: 'COMMON'
-    stats:
-      damage: 5
- */

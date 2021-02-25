@@ -77,6 +77,6 @@ public class SummonManager {
 	}
 
 	public BukkitTask getLocationChecker() {
-		return this.locationChecker;
+		return locationChecker;
 	}
 }

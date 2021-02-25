@@ -110,7 +110,8 @@ public class Foraging extends JavaPlugin {
 			File file = new File(getDataFolder(), String.format("%s.yml", configName));
 
 			if(!file.exists()) {
-				this.saveResource(String.format("%s.yml", configName), false);
+				// For now I'm making it replace the config.
+				this.saveResource(String.format("%s.yml", configName), true);
 			}
 
 			FileConfiguration configuration = new YamlConfiguration();
@@ -151,20 +152,20 @@ public class Foraging extends JavaPlugin {
 	 */
 	public FileConfiguration getConfiguration(String name) {
 		// Just return main config.
-		if(name.equalsIgnoreCase("config")) return this.getConfig();
+		if(name.equalsIgnoreCase("config")) return getConfig();
 		// Check to make sure the config is actually added.
-		return this.configs.getOrDefault(name, null);
+		return configs.getOrDefault(name, null);
 	}
 
 	public LangManager getLangManager() {
-		return this.langManager;
+		return langManager;
 	}
 
 	public ItemManager getItemManager() {
-		return this.itemManager;
+		return itemManager;
 	}
 
 	public RegionManager getRegionManager() {
-		return this.regionManager;
+		return regionManager;
 	}
 }

@@ -2,6 +2,7 @@ package me.tech.foraging.player.events;
 
 import me.tech.foraging.Foraging;
 import me.tech.foraging.models.player.ForagingPlayer;
+import me.tech.foraging.models.player.ForagingPlayerSkills;
 import me.tech.foraging.models.player.ForagingPlayerStats;
 import me.tech.foraging.player.SummonManager;
 import org.bukkit.event.EventHandler;
@@ -22,6 +23,7 @@ public class JoinEvent implements Listener {
 			ev.getPlayer().getUniqueId(),
 			new ForagingPlayer(
 				new ForagingPlayerStats(20, 5),
+				new ForagingPlayerSkills(5, 5, 5, 5, 5, 5),
 				new SummonManager(this.foraging, ev.getPlayer())
 			)
 		);
