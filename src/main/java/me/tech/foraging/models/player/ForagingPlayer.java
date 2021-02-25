@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ForagingPlayer {
-	private ForagingPlayerStats stats;
-	private ForagingPlayerSkills skills;
+	private final ForagingPlayerStats stats;
+	private final ForagingPlayerSkills skills;
 	private final SummonManager summonManager;
 	public List<Location> validSpawnLocations = new ArrayList<>();
 

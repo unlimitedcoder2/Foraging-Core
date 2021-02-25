@@ -1,5 +1,7 @@
 package me.tech.foraging.models.player;
 
+import java.security.InvalidParameterException;
+
 public class ForagingPlayerSkills {
 	private int foragingLevel;
 	private double foragingXP;
@@ -19,26 +21,16 @@ public class ForagingPlayerSkills {
 		this.fishingXP = fishingXP;
 	}
 
-	/**
-	 * @return Foraging level.
-	 */
 	public int getForagingLevel() {
 		return foragingLevel;
 	}
 
-	/**
-	 * @return Foraging XP.
-	 */
 	public double getForagingXP() {
 		return foragingXP;
 	}
 
-	/**
-	 * Set Foraging level.
-	 * @param foragingLevel
-	 */
-	public void setForagingLevel(int foragingLevel) {
-		if(foragingLevel > 50) return;
+	public void setForagingLevel(int foragingLevel) throws InvalidParameterException {
+		if(foragingLevel > 50) throw new InvalidParameterException("Level cannot be above 50.");
 		this.foragingLevel = foragingLevel;
 	}
 
@@ -54,8 +46,8 @@ public class ForagingPlayerSkills {
 		return miningXP;
 	}
 
-	public void setMiningLevel(int miningLevel) {
-		if(miningLevel > 50) return;
+	public void setMiningLevel(int miningLevel) throws InvalidParameterException {
+		if(miningLevel > 50) throw new InvalidParameterException("Level cannot be above 50.");
 		this.miningLevel = miningLevel;
 	}
 
@@ -71,8 +63,8 @@ public class ForagingPlayerSkills {
 		return fishingXP;
 	}
 
-	public void setFishingLevel(int fishingLevel) {
-		if(fishingLevel > 50) return;
+	public void setFishingLevel(int fishingLevel) throws InvalidParameterException {
+		if(fishingLevel > 50) throw new InvalidParameterException("Level cannot be above 50.");
 		this.fishingLevel = fishingLevel;
 	}
 
