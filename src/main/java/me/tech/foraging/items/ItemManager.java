@@ -22,6 +22,7 @@ public class ItemManager {
 
 	public void initItems() {
 		FileConfiguration itemsConfig = this.foraging.getConfiguration("items");
+		this.items.clear();
 
 		for(String id : itemsConfig.getConfigurationSection("items").getKeys(false)) {
 			ConfigurationSection item = itemsConfig.getConfigurationSection(String.format("items.%s", id));
