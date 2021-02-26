@@ -15,11 +15,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-<<<<<<< HEAD
-=======
 import java.sql.SQLException;
 
->>>>>>> DebitCardz/playerdata-storage
 public class JoinEvent implements Listener {
 	private final Foraging foraging;
 	private Database database;
