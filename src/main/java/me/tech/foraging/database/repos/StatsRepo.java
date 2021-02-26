@@ -13,8 +13,8 @@ import java.util.UUID;
 
 public class StatsRepo {
 	private final Foraging foraging;
-	private Database database;
-	private Connection connection;
+	private final Database database;
+	private final Connection connection;
 
 	public StatsRepo(Foraging foraging, Database database) {
 		this.foraging = foraging;
