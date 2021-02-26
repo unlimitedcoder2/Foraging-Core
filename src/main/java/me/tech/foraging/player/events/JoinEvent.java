@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import java.security.InvalidParameterException;
-
 public class JoinEvent implements Listener {
 	private final Foraging foraging;
 

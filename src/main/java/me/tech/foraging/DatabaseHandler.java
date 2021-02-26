@@ -1,7 +1,6 @@
 package me.tech.foraging;
 
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 
 import java.io.File;
 import java.sql.Connection;

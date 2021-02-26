@@ -22,10 +22,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.naming.ConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -80,7 +78,7 @@ public class Foraging extends JavaPlugin {
 				),
 				drops
 		);
-
+		this.getLogger().info(testZombie.getName());
 	}
 
 	@Override

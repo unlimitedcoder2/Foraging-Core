@@ -1,7 +1,5 @@
 package me.tech.foraging.commands;
 
-import static me.tech.foraging.utils.ChatUtils.color;
-
 import me.tech.foraging.Foraging;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

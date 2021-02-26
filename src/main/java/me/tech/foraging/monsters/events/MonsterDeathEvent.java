@@ -25,8 +25,10 @@ public class MonsterDeathEvent implements Listener {
 		if(!this.foraging.monsters.containsKey(entity.getUniqueId())) return;
 		Player killer = ev.getEntity().getKiller();
 		Monster monster = this.foraging.monsters.get(entity.getUniqueId());
+		this.foraging.getLogger().info("Killer is " + killer.getName());
 		// TODO: 2/23/2021 IMPLEMENT 
 		for(String item : monster.getDrops()) {
+			this.foraging.getLogger().info(String.format("Dropped %s", item));
 		}
 	}
 }

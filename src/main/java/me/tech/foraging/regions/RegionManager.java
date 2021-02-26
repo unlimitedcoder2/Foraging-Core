@@ -1,14 +1,11 @@
 package me.tech.foraging.regions;
 
 import me.tech.foraging.Foraging;
-import me.tech.foraging.models.region.ForagingRegion;
-
-import java.util.HashMap;
 
 public class RegionManager {
 	private Foraging foraging;
 
-	private HashMap<String, ForagingRegion> regions = new HashMap<>();
+	// private HashMap<String, ForagingRegion> regions = new HashMap<>();
 
 	public RegionManager(Foraging foraging) {
 		this.foraging = foraging;
@@ -20,5 +17,6 @@ public class RegionManager {
 	 * Loads all region data.
 	 */
 	public void loadRegions() {
+		this.foraging.getLogger().info("pls load regionz");
 	}
 }
