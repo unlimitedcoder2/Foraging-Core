@@ -1,9 +1,8 @@
 package me.tech.foraging.models.item;
 
 import static me.tech.foraging.utils.ChatUtils.color;
+import static me.tech.foraging.utils.ChatUtils.text;
 import org.bukkit.inventory.ItemStack;
-
-import net.kyori.adventure.text.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +58,7 @@ public class ForagingItem {
 		}
 		lore.add(color(String.format("%s%s", this.rarity.getBoldColor(), this.rarity.getName().toUpperCase())));
 
-		Component itemName = Component.text(name);
-		item.getItemMeta().displayName(itemName);
+		item.getItemMeta().displayName(text(name));
 		item.setLore(lore);
 
 		return item;
