@@ -15,6 +15,5 @@ public class RegionEnterEvent implements Listener {
 	@EventHandler
 	public void onRegionEnter(RegionsChangedEvent ev) {
 		// Set<String> regions = ev.getCurrentRegionsNames();
-		this.foraging.getLogger().info("Changed regions!");
 	}
 }
