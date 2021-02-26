@@ -29,30 +29,6 @@ public class ForagingItem {
 		this.stats = stats;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public List<String> getLore() {
-		return lore;
-	}
-
-	public ItemStack getItemStack() {
-		return itemStack;
-	}
-
-	public boolean isGlowing() {
-		return glowing;
-	}
-
-	public ForagingItemRarity getRarity() {
-		return rarity;
-	}
-
-	public ForagingItemStats getStats() {
-		return stats;
-	}
-
 	/**
 	 * @return Item with correct formatting.
 	 */
@@ -90,6 +66,30 @@ public class ForagingItem {
 		}
 		itemLore.add(color(String.format("%s%s", this.rarity.getBoldColor(), this.rarity.getName())));
 		return itemLore;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public List<String> getLore() {
+		return lore;
+	}
+
+	public ItemStack getItemStack() {
+		return itemStack;
+	}
+
+	public boolean isGlowing() {
+		return glowing;
+	}
+
+	public ForagingItemRarity getRarity() {
+		return rarity;
+	}
+
+	public ForagingItemStats getStats() {
+		return stats;
 	}
 }
 
