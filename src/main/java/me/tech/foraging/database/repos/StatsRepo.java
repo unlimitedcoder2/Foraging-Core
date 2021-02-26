@@ -22,6 +22,12 @@ public class StatsRepo {
 		this.connection = database.getConnection();
 	}
 
+	/**
+	 * Get a players stats.
+	 * @param uuid
+	 * @return
+	 * @throws SQLException
+	 */
 	public DBStats getStats(String uuid) throws SQLException {
 		PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM stats WHERE uuid = ? LIMIT 1");
 		statement.setString(1, uuid);

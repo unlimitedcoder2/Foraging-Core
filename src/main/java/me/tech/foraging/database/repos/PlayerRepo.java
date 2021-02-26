@@ -14,8 +14,8 @@ import java.util.UUID;
 
 public class PlayerRepo {
 	private final Foraging foraging;
-	private Database database;
-	private Connection connection;
+	private final Database database;
+	private final Connection connection;
 
 	public PlayerRepo(Foraging foraging, Database database) {
 		this.foraging = foraging;
@@ -23,6 +23,12 @@ public class PlayerRepo {
 		this.connection = database.getConnection();
 	}
 
+	/**
+	 * Insert player into the database.
+	 * @param uuid
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean createPlayer(String uuid) throws SQLException {
 		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO players (uuid) VALUES (?)");
 		statement.setString(1, uuid);
@@ -38,6 +44,12 @@ public class PlayerRepo {
 		return createPlayer(player.getUniqueId().toString());
 	}
 
+	/**
+	 * Get the player.
+	 * @param uuid
+	 * @return
+	 * @throws SQLException
+	 */
 	public DBPlayer getPlayer(String uuid) throws SQLException {
 		PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM players WHERE uuid = ? LIMIT 1");
 		statement.setString(1, uuid);
