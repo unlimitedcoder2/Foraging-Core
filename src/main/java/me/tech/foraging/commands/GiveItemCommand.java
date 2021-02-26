@@ -49,7 +49,7 @@ public class GiveItemCommand implements CommandExecutor {
 		}
 
 		ForagingItem item = this.itemManager.getItems().get(itemID);
-		String itemName = color(String.format("%s%s", item.getRarity().getBoldColor(), item.getName()));
+		String itemName = color(String.format("%s%s", item.getRarity().getColor(), item.getName()));
 
 		receiver.getInventory().addItem(item.getItem());
 		player.sendMessage(this.foraging.getLangManager().getMSG("commands.giveitem.gaveItem")

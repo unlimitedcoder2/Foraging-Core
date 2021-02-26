@@ -31,7 +31,6 @@ public class ItemManager {
 				item.getString("name"),
 				item.getStringList("lore"),
 				new ItemStack(Material.getMaterial(item.getString("itemstack"))),
-				/* For now every item is common. */
 				ForagingItemRarity.valueOf(item.getString("rarity").toUpperCase()),
 				new ForagingItemStats(
 					item.getDouble("stats.health"),

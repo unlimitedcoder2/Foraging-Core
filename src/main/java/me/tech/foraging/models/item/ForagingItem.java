@@ -3,6 +3,7 @@ package me.tech.foraging.models.item;
 import static me.tech.foraging.utils.ChatUtils.color;
 import static me.tech.foraging.utils.ChatUtils.text;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class ForagingItem {
 	public ItemStack getItem() {
 		ItemStack item = new ItemStack(this.itemStack);
 
-		String name = String.format("%s%s", this.rarity.getColor(), this.name);
+		String name = color(String.format("%s%s", this.rarity.getColor(), this.name));
 		List<String> lore = new ArrayList<>();
 		if(this.lore.size() != 0) {
 			for(String l : this.lore) {
@@ -58,8 +59,13 @@ public class ForagingItem {
 		}
 		lore.add(color(String.format("%s%s", this.rarity.getBoldColor(), this.rarity.getName().toUpperCase())));
 
-		item.getItemMeta().displayName(text(name));
+		// wtf am i doing?
+		ItemMeta meta = item.getItemMeta();
+		meta.displayName(text(name));
+
+		item.setItemMeta(meta);
 		item.setLore(lore);
+
 
 		return item;
 	}
