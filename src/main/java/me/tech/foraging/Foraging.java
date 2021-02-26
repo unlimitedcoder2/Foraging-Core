@@ -2,6 +2,7 @@ package me.tech.foraging;
 
 import me.tech.foraging.commands.GiveItemCommand;
 import me.tech.foraging.commands.ReloadConfigurationsCommand;
+import me.tech.foraging.database.Database;
 import me.tech.foraging.items.ItemManager;
 import me.tech.foraging.models.monsters.ForagingMonsterAggression;
 import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
@@ -34,7 +35,7 @@ public class Foraging extends JavaPlugin {
 	public RegionManager regionManager;
 	public PluginManager pluginManager = getServer().getPluginManager();
 	public LangManager langManager;
-	public DatabaseHandler databaseHandler;
+	public Database database;
 
 	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 	public HashMap<UUID, Monster> monsters = new HashMap<>();
@@ -139,8 +140,8 @@ public class Foraging extends JavaPlugin {
 		this.langManager = new LangManager(this);
 		this.langManager.initMessages();
 
-		this.databaseHandler = new DatabaseHandler(this);
-		this.databaseHandler.establishConnection();
+		this.database = new Database(this);
+		this.database.establishConnection();
 
 		this.getLogger().info("Reloaded configurations!");
 	}
@@ -167,5 +168,9 @@ public class Foraging extends JavaPlugin {
 
 	public RegionManager getRegionManager() {
 		return regionManager;
+	}
+
+	public Database getDatabase() {
+		return database;
 	}
 }
