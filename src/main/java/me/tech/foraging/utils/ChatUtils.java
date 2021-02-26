@@ -1,5 +1,6 @@
 package me.tech.foraging.utils;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
@@ -29,5 +30,9 @@ public class ChatUtils {
 
 	public static String color(String m) {
 		return ChatColor.translateAlternateColorCodes('&', m);
+	}
+
+	public static Component text(String m) {
+		return Component.text(m);
 	}
 }

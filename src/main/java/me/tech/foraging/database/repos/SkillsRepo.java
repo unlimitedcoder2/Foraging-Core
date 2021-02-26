@@ -23,6 +23,24 @@ public class SkillsRepo {
 		this.connection = database.getConnection();
 	}
 
+	public boolean createSkills(String uuid) throws SQLException {
+		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO skills (uuid, foraging_xp, mining_xp, fishing_xp) VALUES (?, ?, ?, ?)");
+		statement.setString(1, uuid);
+		statement.setDouble(2, 0);
+		statement.setDouble(3, 0);
+		statement.setDouble(4, 0);
+
+		return statement.execute();
+	}
+
+	public boolean createSkills(UUID uuid) throws SQLException {
+		return createSkills(uuid.toString());
+	}
+
+	public boolean createSkills(Player player) throws SQLException {
+		return createSkills(player.getUniqueId().toString());
+	}
+
 	/**
 	 * Get a players skills.
 	 * @param uuid

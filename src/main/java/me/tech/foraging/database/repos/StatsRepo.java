@@ -22,6 +22,23 @@ public class StatsRepo {
 		this.connection = database.getConnection();
 	}
 
+	public boolean createStats(String uuid) throws SQLException {
+		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO stats (uuid, health, damage) VALUES (?, ?, ?)");
+		statement.setString(1, uuid);
+		statement.setDouble(2, 20);
+		statement.setDouble(3, 5);
+
+		return statement.execute();
+	}
+
+	public boolean createStats(UUID uuid) throws SQLException {
+		return createStats(uuid.toString());
+	}
+
+	public boolean createStats(Player player) throws SQLException {
+		return createStats(player.getUniqueId().toString());
+	}
+
 	/**
 	 * Get a players stats.
 	 * @param uuid
