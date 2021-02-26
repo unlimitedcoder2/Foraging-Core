@@ -11,11 +11,14 @@ import me.tech.foraging.models.player.ForagingPlayer;
 import me.tech.foraging.models.player.ForagingPlayerSkills;
 import me.tech.foraging.models.player.ForagingPlayerStats;
 import me.tech.foraging.player.SummonManager;
+import net.kyori.adventure.text.Component;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.sql.SQLException;
+import java.sql.SQLXML;
 
 public class JoinEvent implements Listener {
 	private final Foraging foraging;
@@ -65,6 +68,18 @@ public class JoinEvent implements Listener {
 
 	    } catch(SQLException ex) {
 			ex.printStackTrace();
+		}
+	}
+
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent ev) {
+		try {
+			this.database.getSkillsRepo().addForagingXP(ev.getPlayer(), 5);
+			ev.getPlayer().sendMessage("You gained 5 Foraging XP!");
+		} catch(SQLException ex) {
+			this.foraging.getLogger().warning(String.format("%s didn't have their skills set, attempting to create now."));
+			// This should never happen.
+			ev.getPlayer().kick(Component.text("Weird, your data was not created correctly, please reconnect!"));
 		}
 	}
 }

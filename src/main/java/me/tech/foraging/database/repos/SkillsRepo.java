@@ -22,6 +22,12 @@ public class SkillsRepo {
 		this.connection = database.getConnection();
 	}
 
+	/**
+	 * Initialize a players skills in the database.
+	 * @param uuid
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean createSkills(String uuid) throws SQLException {
 		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO skills (uuid, foraging_xp, mining_xp, fishing_xp) VALUES (?, ?, ?, ?)");
 		statement.setString(1, uuid);
@@ -35,9 +41,29 @@ public class SkillsRepo {
 	public boolean createSkills(UUID uuid) throws SQLException {
 		return createSkills(uuid.toString());
 	}
-
 	public boolean createSkills(Player player) throws SQLException {
 		return createSkills(player.getUniqueId().toString());
+	}
+
+	/**
+	 * Add Foraging XP to a player.
+	 * @param uuid Player's UUID.
+	 * @param amount Amount of XP to add.
+	 * @throws SQLException
+	 */
+	public boolean addForagingXP(String uuid, double amount) throws SQLException {
+		PreparedStatement statement = this.connection.prepareStatement("UPDATE skills SET foraging_xp = foraging_xp + ? WHERE uuid = ?");
+		statement.setDouble(1, amount);
+		statement.setString(2, uuid);
+
+		return statement.execute();
+	}
+
+	public boolean addForagingXP(UUID uuid, double amount) throws SQLException {
+		return addForagingXP(uuid.toString(), amount);
+	}
+	public boolean addForagingXP(Player player, double amount) throws SQLException {
+		return addForagingXP(player.getUniqueId().toString(), amount);
 	}
 
 	/**
@@ -58,7 +84,6 @@ public class SkillsRepo {
 	public DBSkills getSkills(UUID uuid) throws SQLException {
 		return getSkills(uuid.toString());
 	}
-
 	public DBSkills getSkills(Player player) throws SQLException {
 		return getSkills(player.getUniqueId().toString());
 	}

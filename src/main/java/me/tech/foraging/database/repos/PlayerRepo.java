@@ -24,7 +24,7 @@ public class PlayerRepo {
 	}
 
 	/**
-	 * Insert player into the database.
+	 * Initialize a player in the database.
 	 * @param uuid
 	 * @return
 	 * @throws SQLException
@@ -39,7 +39,6 @@ public class PlayerRepo {
 	public boolean createPlayer(UUID uuid) throws SQLException {
 		return createPlayer(uuid.toString());
 	}
-
 	public boolean createPlayer(Player player) throws SQLException {
 		return createPlayer(player.getUniqueId().toString());
 	}
@@ -62,7 +61,6 @@ public class PlayerRepo {
 	public DBPlayer getPlayer(UUID uuid) throws SQLException {
 		return getPlayer(uuid.toString());
 	}
-
 	public DBPlayer getPlayer(Player player) throws SQLException {
 		return getPlayer(player.getUniqueId().toString());
 	}

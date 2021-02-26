@@ -22,6 +22,12 @@ public class StatsRepo {
 		this.connection = database.getConnection();
 	}
 
+	/**
+	 * Initialize a players stats in the database.
+	 * @param uuid
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean createStats(String uuid) throws SQLException {
 		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO stats (uuid, health, damage) VALUES (?, ?, ?)");
 		statement.setString(1, uuid);
@@ -34,7 +40,6 @@ public class StatsRepo {
 	public boolean createStats(UUID uuid) throws SQLException {
 		return createStats(uuid.toString());
 	}
-
 	public boolean createStats(Player player) throws SQLException {
 		return createStats(player.getUniqueId().toString());
 	}
@@ -57,7 +62,6 @@ public class StatsRepo {
 	public DBStats getStats(UUID uuid) throws SQLException {
 		return getStats(uuid.toString());
 	}
-
 	public DBStats getStats(Player player) throws SQLException {
 		return getStats(player.getUniqueId().toString());
 	}
