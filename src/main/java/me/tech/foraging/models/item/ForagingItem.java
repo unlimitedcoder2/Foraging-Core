@@ -3,6 +3,7 @@ package me.tech.foraging.models.item;
 import static me.tech.foraging.utils.ChatUtils.color;
 import static me.tech.foraging.utils.ChatUtils.text;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -15,7 +16,7 @@ public class ForagingItem {
 	private final String name;
 	private final List<String> lore;
 	private final ItemStack itemStack;
-	private final boolean glowing;
+	private boolean glowing = false;
 	private final ForagingItemRarity rarity;
 	private final ForagingItemStats stats;
 
@@ -68,9 +69,11 @@ public class ForagingItem {
 			else itemMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, false);
 		}
 		itemMeta.displayName(text(itemName));
+		itemStack.setItemMeta(itemMeta);
+		// Gotta set lore after because setItemMeta
+		// is a bit weird.
 		itemStack.setLore(this.formatLore());
 
-		itemStack.setItemMeta(itemMeta);
 		return itemStack;
 	}
 
@@ -85,7 +88,7 @@ public class ForagingItem {
 			}
 			itemLore.add("");
 		}
-		itemLore.add(color(String.format("%s%s", this.rarity.getColor(), this.rarity.getName())));
+		itemLore.add(color(String.format("%s%s", this.rarity.getBoldColor(), this.rarity.getName())));
 		return itemLore;
 	}
 }
