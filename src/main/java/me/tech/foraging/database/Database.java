@@ -5,7 +5,6 @@ import me.tech.foraging.database.repos.PlayerRepo;
 import me.tech.foraging.database.repos.SkillsRepo;
 import me.tech.foraging.database.repos.StatsRepo;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
 
 import java.io.File;
 import java.sql.Connection;
@@ -27,7 +26,6 @@ public class Database {
 
 	/**
 	 * Establish a connection with the database of choice.
-	 * @throws InvalidConfigurationException
 	 */
 	public void establishConnection() {
 		this.databaseType = this.foraging.getConfig().getString("db.type");
@@ -47,7 +45,7 @@ public class Database {
 
 	/**
 	 * Create a connection to the MySQL database.
-	 * @throws SQLException
+	 * @throws SQLException Failed to connect to database.
 	 */
 	private void createMySQL() throws SQLException {
 		ConfigurationSection dbConfig = this.foraging.getConfig().getConfigurationSection("db");
@@ -65,7 +63,7 @@ public class Database {
 
 	/**
 	 * Create a SQLite database if not already created.
-	 * @throws SQLException
+	 * @throws SQLException Failed to connect to database.
 	 */
 	private void createSQLite() throws SQLException {
 		// Name of database file.
