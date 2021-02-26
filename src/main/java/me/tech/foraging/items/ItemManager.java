@@ -31,6 +31,7 @@ public class ItemManager {
 				item.getString("name"),
 				item.getStringList("lore"),
 				new ItemStack(Material.getMaterial(item.getString("itemstack"))),
+				item.getBoolean("glowing"),
 				ForagingItemRarity.valueOf(item.getString("rarity").toUpperCase()),
 				new ForagingItemStats(
 					item.getDouble("stats.health"),
