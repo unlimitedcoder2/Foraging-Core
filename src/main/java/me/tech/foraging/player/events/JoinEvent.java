@@ -18,7 +18,6 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.sql.SQLException;
-import java.sql.SQLXML;
 
 public class JoinEvent implements Listener {
 	private final Foraging foraging;

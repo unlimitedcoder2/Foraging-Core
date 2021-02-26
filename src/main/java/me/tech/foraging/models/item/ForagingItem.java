@@ -3,7 +3,6 @@ package me.tech.foraging.models.item;
 import static me.tech.foraging.utils.ChatUtils.color;
 import static me.tech.foraging.utils.ChatUtils.text;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
