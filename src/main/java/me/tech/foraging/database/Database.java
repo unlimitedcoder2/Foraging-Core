@@ -23,10 +23,6 @@ public class Database {
 
 	public Database(Foraging foraging) {
 		this.foraging = foraging;
-
-		this.playerRepo = new PlayerRepo(foraging, this);
-		this.skillsRepo = new SkillsRepo(foraging, this);
-		this.statsRepo = new StatsRepo(foraging, this);
 	}
 
 	/**
@@ -45,6 +41,7 @@ public class Database {
 				this.createSQLite();
 				this.foraging.getLogger().severe(String.format("An invalid database type of '%s' was set, defaulting to SQLite.", this.databaseType));
 			}
+			this.setupRepos();
 		} catch(SQLException ex) { ex.printStackTrace(); }
 	}
 
@@ -92,6 +89,12 @@ public class Database {
 		);
 	}
 
+	public void setupRepos() {
+		this.playerRepo = new PlayerRepo(foraging, this);
+		this.skillsRepo = new SkillsRepo(foraging, this);
+		this.statsRepo = new StatsRepo(foraging, this);
+	}
+
 	public Connection getConnection() {
 		return connection;
 	}
@@ -106,5 +109,9 @@ public class Database {
 
 	public SkillsRepo getSkillsRepo() {
 		return skillsRepo;
+	}
+
+	public StatsRepo getStatsRepo() {
+		return statsRepo;
 	}
 }
