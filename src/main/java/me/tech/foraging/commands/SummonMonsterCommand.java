@@ -1,5 +1,7 @@
 package me.tech.foraging.commands;
 
+import static me.tech.foraging.utils.ChatUtils.color;
+
 import me.tech.foraging.Foraging;
 import me.tech.foraging.monsters.Monster;
 import org.bukkit.command.Command;
@@ -43,11 +45,11 @@ public class SummonMonsterCommand implements CommandExecutor {
 
 		monster.spawnMonster(player.getLocation());
 
-		player.sendMessage(
+		player.sendMessage(color(
 				this.foraging.getLangManager().getMSG("commands.summonmonster.success")
 				.replace("{aggression_color}", monster.getAggression().getColor())
 				.replace("{monster}", monster.getName())
-		);
+		));
 
 		return true;
 	}
