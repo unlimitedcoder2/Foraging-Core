@@ -35,11 +35,11 @@ public class SummonMonsterCommand implements CommandExecutor {
 		String monsterID = String.join("_", strings);
 		this.foraging.getLogger().info(String.format("Monster ID got was %s", monsterID));
 
-		if(!this.foraging.getMonsters().containsKey(monsterID)) {
+		if(!this.foraging.getMonstersManager().getMonsters().containsKey(monsterID)) {
 			player.sendMessage(this.foraging.getLangManager().getMSG("commands.summonmonster.invalidMonster"));
 			return true;
 		}
-		Monster monster = this.foraging.getMonsters().get(monsterID);
+		Monster monster = this.foraging.getMonstersManager().getMonsters().get(monsterID);
 
 		monster.spawnMonster(player.getLocation());
 

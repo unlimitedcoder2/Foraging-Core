@@ -50,7 +50,7 @@ public class Monster extends ForagingMonster {
 	 */
 	public void returnToInitialSpawnLocation() {
 		if(this.getEntity() == null
-			|| !this.foraging.getMonsters().containsKey(this.getEntity().getUniqueId())
+			|| !this.foraging.getSpawnedMonsters().containsKey(this.getEntity().getUniqueId())
 			/* Entity is already returning to location. */
 			|| this.isReturningToLocation()
 		) return;
@@ -60,7 +60,7 @@ public class Monster extends ForagingMonster {
 		// Every second check to see if the entity
 		// has made it back to their spawn location.
 		new BukkitRunnable() {
-			private Monster monster = foraging.monsters.get(getEntity().getUniqueId());
+			private Monster monster = foraging.getSpawnedMonsters().get(getEntity().getUniqueId());
 
 			@Override
 			public void run() {
@@ -92,7 +92,7 @@ public class Monster extends ForagingMonster {
 		this.setEntity(loc.getWorld().spawnEntity(loc, this.getEntityType()));
 
 		this.spawnLocation = loc;
-		this.foraging.monsters.put(this.getEntity().getUniqueId(), this);
+		this.foraging.getSpawnedMonsters().put(this.getEntity().getUniqueId(), this);
 		return true;
 	}
 

@@ -34,7 +34,7 @@ public class Foraging extends JavaPlugin {
 	public Database database;
 
 	public HashMap<UUID, ForagingPlayer> players = new HashMap<>();
-	public HashMap<UUID, Monster> monsters = new HashMap<>();
+	public HashMap<UUID, Monster> spawnedMonsters = new HashMap<>();
 	private final HashMap<String, FileConfiguration> configs = new HashMap<>();
 
 	@Override
@@ -148,8 +148,8 @@ public class Foraging extends JavaPlugin {
 		return monstersManager;
 	}
 
-	public HashMap<UUID, Monster> getMonsters() {
-		return monsters;
+	public HashMap<UUID, Monster> getSpawnedMonsters() {
+		return spawnedMonsters;
 	}
 
 	public RegionManager getRegionManager() {
