@@ -1,27 +1,27 @@
 package me.tech.foraging.models.monsters;
 
 public class ForagingMonsterStats {
-	private float health;
-	private float damage;
+	private double health;
+	private double damage;
 
-	public ForagingMonsterStats(float health, float damage) {
+	public ForagingMonsterStats(double health, double damage) {
 		this.health = health;
 		this.damage = damage;
 	}
 
-	public float getDamage() {
+	public double getDamage() {
 		return damage;
 	}
 
-	public void setDamage(float damage) {
+	public void setDamage(double damage) {
 		this.damage = damage;
 	}
 
-	public float getHealth() {
+	public double getHealth() {
 		return health;
 	}
 
-	public void setHealth(float health) {
+	public void setHealth(double health) {
 		this.health = health;
 	}
 }

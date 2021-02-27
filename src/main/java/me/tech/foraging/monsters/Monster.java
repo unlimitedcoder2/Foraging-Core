@@ -1,10 +1,7 @@
 package me.tech.foraging.monsters;
 
 import me.tech.foraging.Foraging;
-import me.tech.foraging.models.monsters.ForagingMonster;
-import me.tech.foraging.models.monsters.ForagingMonsterAggression;
-import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
-import me.tech.foraging.models.monsters.ForagingMonsterStats;
+import me.tech.foraging.models.monsters.*;
 import net.minecraft.server.v1_16_R3.EntityInsentient;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
@@ -13,12 +10,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
-public abstract class Monster extends ForagingMonster {
+public class Monster extends ForagingMonster {
 	private final Foraging foraging;
 	private Location spawnLocation;
 
-	public Monster(Foraging foraging, String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment, List<String> drops) {
-		super(name, level, aggression, stats, equipment, drops);
+	public Monster(Foraging foraging, String name, int level, EntityType entityType, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment, List<ForagingMonsterDrops> drops) {
+		super(name, level, entityType, aggression, stats, equipment, drops);
 		this.foraging = foraging;
 	}
 
@@ -63,35 +60,18 @@ public abstract class Monster extends ForagingMonster {
 		// Every second check to see if the entity
 		// has made it back to their spawn location.
 		new BukkitRunnable() {
-			@Override
-			public void run() {
-
-			}
-		}.runTaskTimer(foraging, 20, 20);
-
-/*		if(this.getEntity() == null && !this.foraging.monsters.containsKey(this.getEntity().getUniqueId()) && this.isReturningToLocation()) return;
-
-		LivingEntity livingEntity = (LivingEntity) this.getEntity();
-
-		((EntityInsentient) ((CraftEntity) livingEntity).getHandle())
-			.getNavigation()
-			.a(this.spawnLocation.getX(), this.spawnLocation.getY(), this.spawnLocation.getZ(), 1.5);
-		this.setReturningToLocation(true);
-
-		// Beautiful code.
-		new BukkitRunnable() {
 			private Monster monster = foraging.monsters.get(getEntity().getUniqueId());
 
 			@Override
 			public void run() {
-				if(monster.isReturningToLocation()) {
-					if(getEntity().getLocation().distance(monster.getSpawnLocation()) < 5) {
-						monster.setReturningToLocation(false);
-						cancel();
-					}
+				// Monster is returning to their spawn location
+				// and distance between them and spawn location < 5.
+				if(monster.isReturningToLocation() && monster.getEntity().getLocation().distance(monster.getSpawnLocation()) < 5) {
+					monster.setReturningToLocation(false);
+					cancel();
 				}
 			}
-		}.runTaskTimer(this.foraging, 20*1, 20*1);*/
+		}.runTaskTimer(foraging, 20, 20);
 	}
 
 	private void walkToLocation(Location loc, double speed) {
@@ -105,12 +85,11 @@ public abstract class Monster extends ForagingMonster {
 	/**
 	 * (Prototype) Summons monster with hologram.
  	 * @param loc Location where to spawn the monster.
-	 * @param entityType Type of entity to spawn.
 	 * @return Whether it was successful or not.
 	 */
-	public boolean spawnMonster(Location loc, EntityType entityType) {
+	public boolean spawnMonster(Location loc) {
 		if(loc.getWorld() == null) return false;
-		this.setEntity(loc.getWorld().spawnEntity(loc, entityType));
+		this.setEntity(loc.getWorld().spawnEntity(loc, this.getEntityType()));
 
 		this.spawnLocation = loc;
 		this.foraging.monsters.put(this.getEntity().getUniqueId(), this);

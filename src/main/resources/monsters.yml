@@ -1,6 +1,6 @@
 monsters:
   zombie:
-    id: 'BASIC-ZOMBIE'
+    id: 'BASIC_ZOMBIE'
     name: 'Zombie'
     level: 1
     entity: 'ZOMBIE'
@@ -10,8 +10,13 @@ monsters:
     stats:
       health: 20
       damage: 50
+    drops:
+      1:
+        id: 'stick'
+        amount: 1
+        chance: 100
   skeleton:
-    id: 'BASIC-SKELETON'
+    id: 'BASIC_SKELETON'
     name: 'Skeleton'
     level: 1
     entity: 'SKELETON'

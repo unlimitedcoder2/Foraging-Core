@@ -32,9 +32,9 @@ public class MonsterDeathEvent implements Listener {
 		Monster monster = this.foraging.monsters.get(entity.getUniqueId());
 		this.foraging.getLogger().info("Killer is " + killer.getName());
 		// TODO: 2/23/2021 IMPLEMENT 
-		for(String item : monster.getDrops()) {
-			this.foraging.getLogger().info(String.format("Dropped %s", item));
-		}
+//		for(String item : monster.getDrops()) {
+//			this.foraging.getLogger().info(String.format("Dropped %s", item));
+//		}
 	}
 
 	@EventHandler

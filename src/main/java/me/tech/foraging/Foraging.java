@@ -1,39 +1,33 @@
 package me.tech.foraging;
 
-import me.tech.foraging.commands.CoolCommand;
 import me.tech.foraging.commands.GiveItemCommand;
 import me.tech.foraging.commands.ReloadConfigurationsCommand;
+import me.tech.foraging.commands.SummonMonsterCommand;
 import me.tech.foraging.database.Database;
 import me.tech.foraging.items.ItemManager;
-import me.tech.foraging.models.monsters.ForagingMonsterAggression;
-import me.tech.foraging.models.monsters.ForagingMonsterEquipment;
-import me.tech.foraging.models.monsters.ForagingMonsterStats;
 import me.tech.foraging.models.player.ForagingPlayer;
 import me.tech.foraging.monsters.Monster;
-import me.tech.foraging.monsters.Zombie;
+import me.tech.foraging.monsters.MonstersManager;
 import me.tech.foraging.monsters.events.MonsterDeathEvent;
 import me.tech.foraging.player.events.JoinEvent;
 import me.tech.foraging.player.events.QuitEvent;
 import me.tech.foraging.player.events.RegionEnterEvent;
 import me.tech.foraging.regions.RegionManager;
 import me.tech.foraging.utils.LangManager;
-import org.bukkit.Material;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 public class Foraging extends JavaPlugin {
 	public ItemManager itemManager;
+	public MonstersManager monstersManager;
 	public RegionManager regionManager;
 	public PluginManager pluginManager = getServer().getPluginManager();
 	public LangManager langManager;
@@ -59,29 +53,6 @@ public class Foraging extends JavaPlugin {
 		// some systems need the managers to be setup first.
 		this.initCommands();
 		this.initEvents();
-
-//		List<String> drops = new ArrayList<>();
-//
-//		Zombie testZombie = new Zombie(
-//				this,
-//				"Zombie",
-//				10,
-//				ForagingMonsterAggression.AGGRESSIVE,
-//				new ForagingMonsterStats(
-//						5,
-//						5
-//				),
-//				new ForagingMonsterEquipment(
-//						new ItemStack(Material.AIR),
-//						new ItemStack(Material.AIR),
-//						new ItemStack(Material.AIR),
-//						new ItemStack(Material.AIR),
-//						new ItemStack(Material.AIR),
-//						new ItemStack(Material.AIR)
-//				),
-//				drops
-//		);
-//		this.getLogger().info(testZombie.getName());
 	}
 
 	@Override
@@ -93,7 +64,7 @@ public class Foraging extends JavaPlugin {
 	private void initCommands() {
 		getCommand("giveitem").setExecutor(new GiveItemCommand(this, this.itemManager));
 		getCommand("reloadconfigs").setExecutor(new ReloadConfigurationsCommand(this));
-		getCommand("cool").setExecutor(new CoolCommand(this));
+		getCommand("summonmonster").setExecutor(new SummonMonsterCommand(this));
 	}
 
 	/**
@@ -139,6 +110,9 @@ public class Foraging extends JavaPlugin {
 		this.itemManager = new ItemManager(this);
 		this.itemManager.initItems();
 
+		this.monstersManager = new MonstersManager(this);
+		this.monstersManager.initMonsters();
+
 		this.regionManager = new RegionManager(this);
 
 		this.langManager = new LangManager(this);
@@ -168,6 +142,10 @@ public class Foraging extends JavaPlugin {
 
 	public ItemManager getItemManager() {
 		return itemManager;
+	}
+
+	public MonstersManager getMonstersManager() {
+		return monstersManager;
 	}
 
 	public HashMap<UUID, Monster> getMonsters() {
