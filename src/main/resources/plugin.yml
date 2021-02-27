@@ -9,3 +9,5 @@ commands:
   reloadconfigs:
     usage: reloadconfigs
     aliases: ['reloadconfig']
+  cool:
+    usage: cool

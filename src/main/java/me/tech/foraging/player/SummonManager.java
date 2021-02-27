@@ -31,7 +31,6 @@ public class SummonManager {
 				searchForSpawnLocations();
 				// There are actually valid locations to spawn mobs at.
 				if(foragingPlayer.validSpawnLocations.size() > 0) {
-					foraging.getLogger().info("There are actual valid spawn locations.");
 				}
 			}
 		}.runTaskTimer(this.foraging, 20*5, 20*5);

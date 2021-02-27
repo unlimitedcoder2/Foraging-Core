@@ -8,13 +8,14 @@ import java.util.List;
 public class ForagingMonster {
 	private final String name;
 	private final int level;
-	public Entity entity;
-	// Hologram above entity.
+	private Entity entity;
 	private Hologram hologram;
 	private final ForagingMonsterAggression aggression;
 	private final ForagingMonsterStats stats;
 	private final ForagingMonsterEquipment equipment;
 	private final List<String> drops;
+
+	private boolean returningToLocation = false;
 
 	public ForagingMonster(String name, int level, ForagingMonsterAggression aggression, ForagingMonsterStats stats, ForagingMonsterEquipment equipment, List<String> drops) {
 		this.name = name;
@@ -35,6 +36,10 @@ public class ForagingMonster {
 
 	public Entity getEntity() {
 		return entity;
+	}
+
+	public void setEntity(Entity entity) {
+		this.entity = entity;
 	}
 
 	public Hologram getHologram() {
@@ -59,5 +64,13 @@ public class ForagingMonster {
 
 	public List<String> getDrops() {
 		return drops;
+	}
+
+	public boolean isReturningToLocation() {
+		return returningToLocation;
+	}
+
+	public void setReturningToLocation(boolean returningToLocation) {
+		this.returningToLocation = returningToLocation;
 	}
 }

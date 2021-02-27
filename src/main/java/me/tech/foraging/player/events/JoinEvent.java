@@ -64,7 +64,8 @@ public class JoinEvent implements Listener {
 
 			foragingPlayer.getSummonManager().setForagingPlayer(foragingPlayer);
 			foragingPlayer.getSummonManager().spawnMobs();
-
+			// Test.
+			foragingPlayer.getSettings().setTargetLevel(5);
 	    } catch(SQLException ex) {
 			ex.printStackTrace();
 		}

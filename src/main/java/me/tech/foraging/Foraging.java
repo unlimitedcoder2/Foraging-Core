@@ -1,5 +1,6 @@
 package me.tech.foraging;
 
+import me.tech.foraging.commands.CoolCommand;
 import me.tech.foraging.commands.GiveItemCommand;
 import me.tech.foraging.commands.ReloadConfigurationsCommand;
 import me.tech.foraging.database.Database;
@@ -10,6 +11,7 @@ import me.tech.foraging.models.monsters.ForagingMonsterStats;
 import me.tech.foraging.models.player.ForagingPlayer;
 import me.tech.foraging.monsters.Monster;
 import me.tech.foraging.monsters.Zombie;
+import me.tech.foraging.monsters.events.MonsterDeathEvent;
 import me.tech.foraging.player.events.JoinEvent;
 import me.tech.foraging.player.events.QuitEvent;
 import me.tech.foraging.player.events.RegionEnterEvent;
@@ -58,28 +60,28 @@ public class Foraging extends JavaPlugin {
 		this.initCommands();
 		this.initEvents();
 
-		List<String> drops = new ArrayList<>();
-		
-		Zombie testZombie = new Zombie(
-				this,
-				"Zombie",
-				10,
-				ForagingMonsterAggression.AGGRESSIVE,
-				new ForagingMonsterStats(
-						5,
-						5
-				),
-				new ForagingMonsterEquipment(
-						new ItemStack(Material.AIR),
-						new ItemStack(Material.AIR),
-						new ItemStack(Material.AIR),
-						new ItemStack(Material.AIR),
-						new ItemStack(Material.AIR),
-						new ItemStack(Material.AIR)
-				),
-				drops
-		);
-		this.getLogger().info(testZombie.getName());
+//		List<String> drops = new ArrayList<>();
+//
+//		Zombie testZombie = new Zombie(
+//				this,
+//				"Zombie",
+//				10,
+//				ForagingMonsterAggression.AGGRESSIVE,
+//				new ForagingMonsterStats(
+//						5,
+//						5
+//				),
+//				new ForagingMonsterEquipment(
+//						new ItemStack(Material.AIR),
+//						new ItemStack(Material.AIR),
+//						new ItemStack(Material.AIR),
+//						new ItemStack(Material.AIR),
+//						new ItemStack(Material.AIR),
+//						new ItemStack(Material.AIR)
+//				),
+//				drops
+//		);
+//		this.getLogger().info(testZombie.getName());
 	}
 
 	@Override
@@ -91,6 +93,7 @@ public class Foraging extends JavaPlugin {
 	private void initCommands() {
 		getCommand("giveitem").setExecutor(new GiveItemCommand(this, this.itemManager));
 		getCommand("reloadconfigs").setExecutor(new ReloadConfigurationsCommand(this));
+		getCommand("cool").setExecutor(new CoolCommand(this));
 	}
 
 	/**
@@ -100,6 +103,7 @@ public class Foraging extends JavaPlugin {
 		pluginManager.registerEvents(new JoinEvent(this), this);
 		pluginManager.registerEvents(new QuitEvent(this), this);
 		pluginManager.registerEvents(new RegionEnterEvent(this), this);
+		pluginManager.registerEvents(new MonsterDeathEvent(this), this);
 	}
 
 	/**
