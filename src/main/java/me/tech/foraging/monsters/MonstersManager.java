@@ -27,19 +27,21 @@ public class MonstersManager {
 
 		for(String monsterID : monstersConfig.getConfigurationSection("monsters").getKeys(false)) {
 			ConfigurationSection monster = monstersConfig.getConfigurationSection(String.format("monsters.%s", monsterID));
+			ConfigurationSection drops = monster.getConfigurationSection("drops");
 			ConfigurationSection equipment = monster.getConfigurationSection("equipment");
 
-			List<ForagingMonsterDrops> drops = new ArrayList<>();
+			List<ForagingMonsterDrops> dropsList = new ArrayList<>();
 			// Monster has drops.
-			if(monster.contains("drops")) {
-				for(String dropID : monster.getConfigurationSection(String.format("%s.drops", monsterID)).getKeys(false)) {
-					ConfigurationSection drop = monster.getConfigurationSection(String.format("drops.%s", dropID));
+
+			if(drops != null) {
+				for(String dropID : drops.getKeys(false)) {
+					ConfigurationSection drop = drops.getConfigurationSection(dropID);
 
 					String itemID = drop.getString("id");
 					int dropAmount = drop.getInt("amount");
 					double dropChance = drop.getDouble("chance");
 
-					drops.add(new ForagingMonsterDrops(itemID, dropAmount, dropChance));
+					dropsList.add(new ForagingMonsterDrops(itemID, dropAmount, dropChance));
 				}
 			}
 
@@ -55,14 +57,27 @@ public class MonstersManager {
 					),
 					/* owo */
 					new ForagingMonsterEquipment(
-							new ItemStack(Material.valueOf(equipment.getString("helmet"))),
-							new ItemStack(Material.valueOf(equipment.getString("chestplate"))),
-							new ItemStack(Material.valueOf(equipment.getString("leggings"))),
-							new ItemStack(Material.valueOf(equipment.getString("boots"))),
-							new ItemStack(Material.valueOf(equipment.getString("mainHand"))),
-							new ItemStack(Material.valueOf(equipment.getString("offHand")))
+							/* TODO: 2/27/2021 Implement system to allow for glowing items. */
+							new ItemStack(Material.valueOf(
+									equipment.getString("helmet") != null ? equipment.getString("helmet").toUpperCase() : "AIR")
+							),
+							new ItemStack(Material.valueOf(
+									equipment.getString("chestplate") != null ? equipment.getString("chestplate").toUpperCase() : "AIR")
+							),
+							new ItemStack(Material.valueOf(
+									equipment.getString("leggings") != null ? equipment.getString("leggings").toUpperCase() : "AIR")
+							),
+							new ItemStack(Material.valueOf(
+									equipment.getString("boots") != null ? equipment.getString("boots").toUpperCase() : "AIR")
+							),
+							new ItemStack(Material.valueOf(
+									equipment.getString("mainHand") != null ? equipment.getString("mainHand").toUpperCase() : "AIR")
+							),
+							new ItemStack(Material.valueOf(
+									equipment.getString("offHand") != null ? equipment.getString("offHand").toUpperCase() : "AIR")
+							)
 					),
-					drops
+					dropsList
 			);
 			this.foraging.getLogger().info(String.format("Added monster %s!", monsterID));
 			this.monsters.put(monsterID, foragingMonster);
