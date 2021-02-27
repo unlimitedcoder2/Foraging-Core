@@ -27,9 +27,9 @@ public class MonsterDeathEvent implements Listener {
 
 		if(entity instanceof Player) return;
 		// Is not a custom created entity.
-		if(!this.foraging.monsters.containsKey(entity.getUniqueId())) return;
+		if(!this.foraging.getSpawnedMonsters().containsKey(entity.getUniqueId())) return;
 		Player killer = ev.getEntity().getKiller();
-		Monster monster = this.foraging.monsters.get(entity.getUniqueId());
+		Monster monster = this.foraging.getSpawnedMonsters().get(entity.getUniqueId());
 		this.foraging.getLogger().info("Killer is " + killer.getName());
 		// TODO: 2/23/2021 IMPLEMENT 
 //		for(String item : monster.getDrops()) {
@@ -40,9 +40,9 @@ public class MonsterDeathEvent implements Listener {
 	@EventHandler
 	public void onMonsterDamage(EntityDamageByEntityEvent ev) {
 		Entity entity = ev.getEntity();
-		if(!this.foraging.monsters.containsKey(entity.getUniqueId())) return;
+		if(!this.foraging.getSpawnedMonsters().containsKey(entity.getUniqueId())) return;
 
-		Monster monster = this.foraging.monsters.get(entity.getUniqueId());
+		Monster monster = this.foraging.getSpawnedMonsters().get(entity.getUniqueId());
 		this.foraging.getLogger().info("RETURNING ENTITY TO INITIAL LOCATION!!!!!!!!");
 		monster.returnToInitialSpawnLocation();
 	}
