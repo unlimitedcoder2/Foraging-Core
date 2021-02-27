@@ -170,6 +170,10 @@ public class Foraging extends JavaPlugin {
 		return itemManager;
 	}
 
+	public HashMap<UUID, Monster> getMonsters() {
+		return monsters;
+	}
+
 	public RegionManager getRegionManager() {
 		return regionManager;
 	}

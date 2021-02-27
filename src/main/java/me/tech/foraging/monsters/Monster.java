@@ -52,7 +52,24 @@ public abstract class Monster extends ForagingMonster {
 	 * where they originally spawned.
 	 */
 	public void returnToInitialSpawnLocation() {
-		if(this.getEntity() == null && !this.foraging.monsters.containsKey(this.getEntity().getUniqueId()) && this.isReturningToLocation()) return;
+		if(this.getEntity() == null
+			|| !this.foraging.getMonsters().containsKey(this.getEntity().getUniqueId())
+			/* Entity is already returning to location. */
+			|| this.isReturningToLocation()
+		) return;
+
+		this.walkToLocation(spawnLocation, 2);
+
+		// Every second check to see if the entity
+		// has made it back to their spawn location.
+		new BukkitRunnable() {
+			@Override
+			public void run() {
+
+			}
+		}.runTaskTimer(foraging, 20, 20);
+
+/*		if(this.getEntity() == null && !this.foraging.monsters.containsKey(this.getEntity().getUniqueId()) && this.isReturningToLocation()) return;
 
 		LivingEntity livingEntity = (LivingEntity) this.getEntity();
 
@@ -61,6 +78,7 @@ public abstract class Monster extends ForagingMonster {
 			.a(this.spawnLocation.getX(), this.spawnLocation.getY(), this.spawnLocation.getZ(), 1.5);
 		this.setReturningToLocation(true);
 
+		// Beautiful code.
 		new BukkitRunnable() {
 			private Monster monster = foraging.monsters.get(getEntity().getUniqueId());
 
@@ -73,7 +91,15 @@ public abstract class Monster extends ForagingMonster {
 					}
 				}
 			}
-		}.runTaskTimer(this.foraging, 20*1, 20*1);
+		}.runTaskTimer(this.foraging, 20*1, 20*1);*/
+	}
+
+	private void walkToLocation(Location loc, double speed) {
+		LivingEntity livingEntity = (LivingEntity) this.getEntity();
+		// NMS magic.
+		((EntityInsentient) ((CraftEntity) livingEntity).getHandle())
+			.getNavigation()
+			.a(loc.getX(), loc.getY(), loc.getZ(), speed);
 	}
 
 	/**

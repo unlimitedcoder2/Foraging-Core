@@ -8,6 +8,8 @@ import java.sql.SQLException;
 
 public class DBPlayer {
 	public String uuid;
+	public DBSkills skills;
+	public DBStats stats;
 
 	/**
 	 * Get player from database.
