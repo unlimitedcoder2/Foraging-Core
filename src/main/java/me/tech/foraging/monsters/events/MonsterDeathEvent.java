@@ -2,16 +2,15 @@ package me.tech.foraging.monsters.events;
 
 import com.destroystokyo.paper.event.entity.EntityPathfindEvent;
 import me.tech.foraging.Foraging;
+import me.tech.foraging.models.monsters.ForagingMonsterDrops;
 import me.tech.foraging.monsters.Monster;
-import me.tech.foraging.utils.ChatUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class MonsterDeathEvent implements Listener {
 	private final Foraging foraging;
@@ -24,17 +23,21 @@ public class MonsterDeathEvent implements Listener {
 	public void onMonsterDeath(EntityDeathEvent ev) {
 		Entity entity = ev.getEntity();
 		ev.getDrops().removeAll(ev.getDrops());
-
 		if(entity instanceof Player) return;
-		// Is not a custom created entity.
 		if(!this.foraging.getSpawnedMonsters().containsKey(entity.getUniqueId())) return;
-		Player killer = ev.getEntity().getKiller();
 		Monster monster = this.foraging.getSpawnedMonsters().get(entity.getUniqueId());
-		this.foraging.getLogger().info("Killer is " + killer.getName());
-		// TODO: 2/23/2021 IMPLEMENT 
-//		for(String item : monster.getDrops()) {
-//			this.foraging.getLogger().info(String.format("Dropped %s", item));
-//		}
+
+		// Was killed by a player.
+	    if(ev.getEntity().getKiller() == null) {
+		 	Player killer = ev.getEntity().getKiller();
+			return;
+	    }
+
+	    for(ForagingMonsterDrops drop : monster.getDrops()) {
+		    ItemStack item = this.foraging.getItemManager().getItems().get(drop.getID()).getItem();
+	        ev.getDrops().add(item);
+	    }
+		this.foraging.getLogger().info(String.format("Dropped %s", ev.getDrops().toArray()));
 	}
 
 	@EventHandler
@@ -44,7 +47,7 @@ public class MonsterDeathEvent implements Listener {
 
 		Monster monster = this.foraging.getSpawnedMonsters().get(entity.getUniqueId());
 		this.foraging.getLogger().info("RETURNING ENTITY TO INITIAL LOCATION!!!!!!!!");
-		monster.returnToInitialSpawnLocation();
+		monster.returnToInitialSpawnLocation(1.25);
 	}
 
 	@EventHandler

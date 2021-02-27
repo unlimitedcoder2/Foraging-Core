@@ -49,15 +49,16 @@ public class Monster extends ForagingMonster {
 	/**
 	 * Make the monster drop whatever they're doing to go back to
 	 * where they originally spawned.
+	 * @param speed Speed at which the entity walks back to their spawn location.
 	 */
-	public void returnToInitialSpawnLocation() {
+	public void returnToInitialSpawnLocation(double speed) {
 		if(this.getEntity() == null
 			|| !this.foraging.getSpawnedMonsters().containsKey(this.getEntity().getUniqueId())
 			/* Entity is already returning to location. */
 			|| this.isReturningToLocation()
 		) return;
 
-		this.walkToLocation(spawnLocation, 2);
+		this.walkToLocation(spawnLocation, speed);
 
 		// Every second check to see if the entity
 		// has made it back to their spawn location.
