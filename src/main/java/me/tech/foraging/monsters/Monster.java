@@ -6,6 +6,8 @@ import net.minecraft.server.v1_16_R3.EntityInsentient;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
@@ -91,9 +93,35 @@ public class Monster extends ForagingMonster {
 		if(loc.getWorld() == null) return false;
 		this.setEntity(loc.getWorld().spawnEntity(loc, this.getEntityType()));
 
+		this.equipMonster();
+
 		this.spawnLocation = loc;
 		this.foraging.getSpawnedMonsters().put(this.getEntity().getUniqueId(), this);
 		return true;
+	}
+
+	/**
+	 * Equip monster with the armor and equipment they have.
+	 */
+	private void equipMonster() {
+		// This is all really repetitive but honestly whatever.
+		LivingEntity entity = (LivingEntity) this.getEntity();
+
+		// TODO: 2/27/2021 If possible make this cleaner.
+		// TODO: 2/27/2021 Implement system toa llow items to be glowing.
+		entity.getEquipment().setHelmet(this.getEquipment().getHelmet());
+		entity.getEquipment().setChestplate(this.getEquipment().getChestplate());
+		entity.getEquipment().setLeggings(this.getEquipment().getLeggings());
+		entity.getEquipment().setBoots(this.getEquipment().getBoots());
+		entity.getEquipment().setItemInMainHand(this.getEquipment().getMainHand());
+		entity.getEquipment().setItemInOffHand(this.getEquipment().getOffHand());
+
+		entity.getEquipment().setHelmetDropChance(0);
+		entity.getEquipment().setChestplateDropChance(0);
+		entity.getEquipment().setLeggingsDropChance(0);
+		entity.getEquipment().setBootsDropChance(0);
+		entity.getEquipment().setItemInMainHandDropChance(0);
+		entity.getEquipment().setItemInOffHandDropChance(0);
 	}
 
 	/**
