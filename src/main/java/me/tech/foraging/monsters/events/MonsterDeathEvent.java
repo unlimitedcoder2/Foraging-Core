@@ -37,7 +37,6 @@ public class MonsterDeathEvent implements Listener {
 		    ItemStack item = this.foraging.getItemManager().getItems().get(drop.getID()).getItem();
 	        ev.getDrops().add(item);
 	    }
-		this.foraging.getLogger().info(String.format("Dropped %s", ev.getDrops().toArray()));
 	}
 
 	@EventHandler
