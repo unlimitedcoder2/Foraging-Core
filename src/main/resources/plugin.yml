@@ -3,12 +3,3 @@ main: me.tech.foraging.Foraging
 version: 1.0.0
 author: Tech
 depend: [HolographicDisplays, WorldGuard, WorldGuardEvents]
-commands:
-  giveitem:
-    usage: giveitem
-  reloadconfigs:
-    usage: reloadconfigs
-    aliases: ['reloadconfig']
-  summonmonster:
-    usage: summonmonster
-    aliases: ['summonmob']
