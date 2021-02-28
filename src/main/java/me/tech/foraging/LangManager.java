@@ -23,7 +23,7 @@ public class LangManager {
 	 * @return Colored message.
 	 */
 	public String get(String id, ForagingPlayerLanguage language) {
-		return this.messages.get(language.getId()+id);
+		return this.messages.get(language.getId()+"."+id);
 	}
 
 	/**
