@@ -1,4 +1,3 @@
-id: 'en'
 core:
   invalidPermissions: '&cYou are lacking the required permissions to execute this command.'
 commands:
