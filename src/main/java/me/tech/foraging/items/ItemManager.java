@@ -13,7 +13,7 @@ public class ItemManager {
 		this.foraging = foraging;
 	}
 
-	public void initItems() {
+	public void load() {
 		this.items.clear();
 	}
 }

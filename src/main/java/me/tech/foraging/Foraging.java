@@ -42,10 +42,10 @@ public class Foraging extends JavaPlugin {
 	 */
 	private void reloadManagers() {
 		this.itemManager = new ItemManager(this);
-		this.itemManager.initItems();
+		this.itemManager.load();
 
 		this.configManager = new ConfigManager(this);
-		this.configManager.initConfigs();
+		this.configManager.load();
 
 		getLogger().info("Reloaded system managers.");
 	}
