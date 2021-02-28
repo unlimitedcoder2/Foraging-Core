@@ -56,9 +56,9 @@ public class ConfigManager {
 			try {
 				configurationFile.load(file);
 				this.configurations.put(
-			        id.replaceAll(".yml", "")
-						.replaceAll(".yaml", ""),
-					configurationFile
+	                    id.replaceAll(".yml", "")
+							.replaceAll(".yaml", ""),
+						configurationFile
 				);
 			} catch(IOException | InvalidConfigurationException ex) {
 				ex.printStackTrace();
@@ -78,6 +78,17 @@ public class ConfigManager {
 
         	if(!file.exists())
         		foraging.saveResource(String.format("lang/%s.yml", language.getId()), false);
+
+            FileConfiguration configurationFile = new YamlConfiguration();
+			try {
+				configurationFile.load(file);
+				this.configurations.put(
+						language.getId(),
+						configurationFile
+				);
+			} catch(IOException | InvalidConfigurationException ex) {
+				ex.printStackTrace();
+			}
         }
 	}
 
