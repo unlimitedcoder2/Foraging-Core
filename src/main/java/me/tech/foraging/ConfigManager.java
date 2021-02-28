@@ -1,9 +1,12 @@
 package me.tech.foraging;
 
 import me.tech.foraging.models.player.ForagingPlayerLanguage;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,6 +18,16 @@ public class ConfigManager {
 
 	public ConfigManager(Foraging foraging) {
 		this.foraging = foraging;
+	}
+
+	/**
+	 * Get specific configuration.
+	 * @param id
+	 * @return
+	 */
+	public FileConfiguration get(String id) {
+		if(id.equalsIgnoreCase("config")) return foraging.getConfig();
+		return this.configurations.get(id);
 	}
 
 	/**
@@ -48,6 +61,18 @@ public class ConfigManager {
 			File file = new File(foraging.getDataFolder(), String.format("%s%s", path, fileName));
 
 			if(!file.exists()) foraging.saveResource(String.format("%s%s", path, fileName), false);
+
+			FileConfiguration configuration = new YamlConfiguration();
+			try {
+				configuration.load(file);
+
+				this.configurations.put(
+						fileName.replaceAll(".yml", ""),
+						configuration
+				);
+			} catch(IOException | InvalidConfigurationException ex) {
+				ex.printStackTrace();
+			}
 		}
 	}
 
