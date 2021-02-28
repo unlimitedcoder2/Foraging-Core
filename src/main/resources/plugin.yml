@@ -3,3 +3,6 @@ main: me.tech.foraging.Foraging
 version: 1.0.0
 author: Tech
 depend: [HolographicDisplays, WorldGuard, WorldGuardEvents]
+commands:
+  setlanguage:
+    usage: /setlanguage

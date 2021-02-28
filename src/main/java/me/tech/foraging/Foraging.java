@@ -1,5 +1,6 @@
 package me.tech.foraging;
 
+import me.tech.foraging.commands.SetLanguageCommand;
 import me.tech.foraging.items.ItemManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,7 +32,9 @@ public class Foraging extends JavaPlugin {
 	/**
 	 * Initialize server commands.
 	 */
-	private void initCommands() { }
+	private void initCommands() {
+		getCommand("setlanguage").setExecutor(new SetLanguageCommand(this));
+	}
 
 	/**
 	 * Initialize server events.

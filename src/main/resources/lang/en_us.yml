@@ -5,3 +5,9 @@ commands:
     usage: '&cUsage: /giveitem <player> <id> <amount>.'
     invalidItem: '&cSorry! That''s not a valid item id.'
     success: '&aYou have given &f{receiver}&r &aa &r{itemName}&a.'
+  setlanguage:
+    usage: '&cUsage: /setlanguage <language>.'
+    invalidLanguage:
+      - '&cSorry! That''s not a valid language.'
+      - '&cSupported languages: &f{languages}&c.'
+    success: '&aYou have updated your language to &f{language}&a.'
