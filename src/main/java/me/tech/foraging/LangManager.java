@@ -1,5 +1,7 @@
 package me.tech.foraging;
 
+import static me.tech.foraging.utils.ChatUtils.color;
+
 import me.tech.foraging.models.player.ForagingPlayerLanguage;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -15,10 +17,9 @@ public class LangManager {
 	}
 
 	public String get(String id) {
-		return null;
+		return this.messages.get(id);
 	}
 
-	// TODO: 2/28/2021 Implement this.
 	public void load() {
 		ForagingPlayerLanguage[] supportedLanguages = ForagingPlayerLanguage.values();
 		this.messages.clear();
@@ -27,7 +28,15 @@ public class LangManager {
 			FileConfiguration configuration = foraging.getConfigManager().get(language.getId());
 
 			for(String path : configuration.getKeys(true)) {
-				foraging.getLogger().info(path);
+				if(!configuration.isSet(path)) continue;
+
+				if(configuration.isString(path))
+					this.messages.put(path, color(configuration.getString(path)));
+				else if(configuration.isList(path))
+					this.messages.put(
+							path,
+							color(String.join("\n", configuration.getStringList(path)))
+					);
 			}
 		}
 	}
