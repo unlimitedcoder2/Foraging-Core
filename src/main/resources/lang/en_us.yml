@@ -1,0 +1,8 @@
+id: 'en'
+core:
+  invalidPermissions: '&cYou are lacking the required permissions to execute this command.'
+commands:
+  giveitem:
+    usage: '&cUsage: /giveitem <player> <id> <amount>.'
+    invalidItem: '&cSorry! That''s not a valid item id.'
+    success: '&aYou have given &f{receiver}&r &aa &r{itemName}&a.'
