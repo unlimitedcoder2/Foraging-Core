@@ -9,6 +9,7 @@ public class Foraging extends JavaPlugin {
 
 	private ItemManager itemManager;
 	private ConfigManager configManager;
+	private LangManager langManager;
 
 	@Override
 	public void onEnable() {
@@ -47,6 +48,9 @@ public class Foraging extends JavaPlugin {
 		this.configManager = new ConfigManager(this);
 		this.configManager.load();
 
+		this.langManager = new LangManager(this);
+		this.langManager.load();
+
 		getLogger().info("Reloaded system managers.");
 	}
 
@@ -69,5 +73,9 @@ public class Foraging extends JavaPlugin {
 
 	public ConfigManager getConfigManager() {
 		return configManager;
+	}
+
+	public LangManager getLangManager() {
+		return langManager;
 	}
 }
