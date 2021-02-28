@@ -16,6 +16,21 @@ public class LangManager {
 		this.foraging = foraging;
 	}
 
+	/**
+	 * Get a message.
+	 * @param id Message ID.
+	 * @param language Player's selected language.
+	 * @return Colored message.
+	 */
+	public String get(String id, ForagingPlayerLanguage language) {
+		return this.messages.get(language.getId()+id);
+	}
+
+	/**
+	 * Get a message.
+	 * @param id Message ID.
+	 * @return Colored message.
+	 */
 	public String get(String id) {
 		return this.messages.get(id);
 	}
@@ -30,13 +45,17 @@ public class LangManager {
 			for(String path : configuration.getKeys(true)) {
 				if(!configuration.isSet(path)) continue;
 
-				if(configuration.isString(path))
-					this.messages.put(path, color(configuration.getString(path)));
-				else if(configuration.isList(path))
+				if(configuration.isString(path)) {
 					this.messages.put(
-							path,
+							String.format("%s.%s", language.getId(), path),
+							color(configuration.getString(path))
+					);
+				} else if(configuration.isList(path)) {
+					this.messages.put(
+							String.format("%s.%s", language.getId(), path),
 							color(String.join("\n", configuration.getStringList(path)))
 					);
+				}
 			}
 		}
 	}
