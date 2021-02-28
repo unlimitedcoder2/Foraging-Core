@@ -1,7 +1,7 @@
 package me.tech.foraging.models.player;
 
 public enum ForagingPlayerLanguage {
-	en("English", "en_us");
+	en_us("English", "en_us");
 
 	private final String name;
 	private final String id;
