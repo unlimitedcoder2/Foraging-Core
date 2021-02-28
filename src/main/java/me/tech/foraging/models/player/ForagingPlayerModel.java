@@ -1,9 +1,9 @@
 package me.tech.foraging.models.player;
 
 public abstract class ForagingPlayerModel {
-	private ForagingPlayerStats stats;
-	private ForagingPlayerSkills skills;
-	private ForagingPlayerSettings settings;
+	private final ForagingPlayerStats stats;
+	private final ForagingPlayerSkills skills;
+	private final ForagingPlayerSettings settings;
 
 	public ForagingPlayerModel(ForagingPlayerStats stats, ForagingPlayerSkills skills, ForagingPlayerSettings settings) {
 		this.stats = stats;
