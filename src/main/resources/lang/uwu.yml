@@ -1,0 +1,13 @@
+core:
+  invalidPermissions: '&cu r wacking the wequiwed pewmissions to execute this command.'
+commands:
+  giveitem:
+    usage: '&cUsage: /giveitem <pwayew> <id> <amount>.'
+    invalidItem: '&cSowwy! That''s nyot a vawid item id.'
+    success: '&au have given &f{receiver}&r &aa &r{itemName}&a.'
+  setlanguage:
+    usage: '&cUsage: /setlanguage <wanguage>.'
+    invalidLanguage:
+      - '&cSowwy! That''s nyot a vawid wanguage.'
+      - '&cSuppowted wanguages: &f{languages}&c.'
+    success: '&au have updated ur wanguage to &f{language}&a.'
