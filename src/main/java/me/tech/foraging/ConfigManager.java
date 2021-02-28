@@ -38,37 +38,27 @@ public class ConfigManager {
 
 		this.loadLanguages();
 
-		for(String fileName : configurations) {
-			// Current path of folders to create.
+		for(String config : configurations) {
 			List<String> currentPath = new ArrayList<>();
 
-			// Load any and all directories a configuration file may have.
-			if(fileName.contains("/")) {
-				// List of all directories leading to the file.
-				List<String> directoryTree = Arrays.asList(fileName.split("/"));;
-				// Remove the actual config file from the directory list.
-				directoryTree.remove(directoryTree.size() - 1);
-				for(String directory : directoryTree) {
-					// Add current directory to the path list.
-					currentPath.add(directory);
-					createFolder(String.join("/", currentPath));
-				}
+			for(String directory : config.split("/")) {
+				currentPath.add(directory);
+				createFolder(String.join("/", currentPath));
 			}
 
-			String path = String.join("/", currentPath);
-			if(!path.equals("")) path += "/";
+			File file = new File(foraging.getDataFolder(), config);
+			// Create file if it doesn't exist.
+			if(!file.exists()) foraging.saveResource(config, false);
+			// ID of the configuration.
+			String id = currentPath.get(currentPath.size() - 1);
 
-			File file = new File(foraging.getDataFolder(), String.format("%s%s", path, fileName));
-
-			if(!file.exists()) foraging.saveResource(String.format("%s%s", path, fileName), false);
-
-			FileConfiguration configuration = new YamlConfiguration();
+			FileConfiguration configurationFile = new YamlConfiguration();
 			try {
-				configuration.load(file);
-
+				configurationFile.load(file);
 				this.configurations.put(
-						fileName.replaceAll(".yml", ""),
-						configuration
+			        id.replaceAll(".yml", "")
+						.replaceAll(".yaml", ""),
+					configurationFile
 				);
 			} catch(IOException | InvalidConfigurationException ex) {
 				ex.printStackTrace();
@@ -96,6 +86,10 @@ public class ConfigManager {
 	 * @param path
 	 */
 	protected void createFolder(String path) {
+		// I'm really lazy so I'm just gonna add a check
+		// to make sure the path doesn't have an extension.
+		if(path.contains(".")) return;
+
 		File file = new File(foraging.getDataFolder(), path);
 		if(!file.exists()) {
 			file.mkdir();
