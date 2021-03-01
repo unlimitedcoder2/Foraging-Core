@@ -5,8 +5,12 @@ import java.sql.SQLException;
 
 public class DBStats {
 	public String uuid;
-	public double health;
-	public double damage;
+	public int health;
+	public int damage;
+	public int defense;
+	public int speed;
+	public int weight;
+	public int power;
 
 	/**
 	 * Get stats from database.
@@ -20,6 +24,10 @@ public class DBStats {
 		dbStats.uuid = result.getString("uuid");
 		dbStats.health = result.getInt("health");
 		dbStats.damage = result.getInt("damage");
+		dbStats.defense = result.getInt("defense");
+		dbStats.speed = result.getInt("speed");
+		dbStats.weight = result.getInt("weight");
+		dbStats.power = result.getInt("power");
 
 		return dbStats;
 	}
