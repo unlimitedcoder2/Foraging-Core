@@ -19,6 +19,9 @@ public class ForagingItem extends ForagingItemModel {
 		super(name, lore, itemStack, glowing, rarity, stats);
 	}
 
+	/**
+	 * @return ItemStack with all information associated with it.
+	 */
 	public ItemStack getItem() {
 		ItemStack item = this.getItemStack();
 		item = applyGlowing(item);
@@ -89,10 +92,8 @@ public class ForagingItem extends ForagingItemModel {
 	 */
 	private List<String> applyStatsLore() {
 		List<String> lore = new ArrayList<>();
+		lore.add("");
 
-		// The item probably already has some lore
-		// applied to it, so add a spacer.
-		if(getLore().size() != 0) lore.add("");
 		// TODO: 2/27/2021 Possibly have a cleaner implementation of this in the future.
 		if(getStats().getHealth() != 0) lore.add(getStats().getHealthFormatted());
 		if(getStats().getDamage() != 0) lore.add(getStats().getDamageFormatted());
@@ -100,6 +101,11 @@ public class ForagingItem extends ForagingItemModel {
 		if(getStats().getSpeed() != 0) lore.add(getStats().getSpeedFormatted());
 		if(getStats().getWeight() != 0) lore.add(getStats().getWeightFormatted());
 		if(getStats().getPower() != 0) lore.add(getStats().getPowerFormatted());
+
+		// If the item has no stats then just
+		// clear the lore.
+		if(lore.size() == 1)
+			lore.clear();
 
 		return lore;
 	}
