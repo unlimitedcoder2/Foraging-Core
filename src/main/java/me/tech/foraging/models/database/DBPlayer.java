@@ -1,5 +1,6 @@
 package me.tech.foraging.models.database;
 
+import me.tech.foraging.database.repos.SettingsRepo;
 import me.tech.foraging.database.repos.SkillsRepo;
 import me.tech.foraging.database.repos.StatsRepo;
 
@@ -29,5 +30,9 @@ public class DBPlayer {
 
 	public DBStats getStats(StatsRepo repo) throws SQLException {
 		return repo.getStats(this.uuid);
+	}
+
+	public DBSettings getSettings(SettingsRepo repo) throws SQLException {
+		return repo.getSettings(this.uuid);
 	}
 }

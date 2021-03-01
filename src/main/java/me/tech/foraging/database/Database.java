@@ -2,6 +2,7 @@ package me.tech.foraging.database;
 
 import me.tech.foraging.Foraging;
 import me.tech.foraging.database.repos.PlayerRepo;
+import me.tech.foraging.database.repos.SettingsRepo;
 import me.tech.foraging.database.repos.SkillsRepo;
 import me.tech.foraging.database.repos.StatsRepo;
 import org.bukkit.configuration.ConfigurationSection;
@@ -19,6 +20,7 @@ public class Database {
 	private PlayerRepo playerRepo;
 	private SkillsRepo skillsRepo;
 	private StatsRepo statsRepo;
+	private SettingsRepo settingsRepo;
 
 	public Database(Foraging foraging) {
 		this.foraging = foraging;
@@ -91,6 +93,7 @@ public class Database {
 		this.playerRepo = new PlayerRepo(foraging, this);
 		this.skillsRepo = new SkillsRepo(foraging, this);
 		this.statsRepo = new StatsRepo(foraging, this);
+		this.settingsRepo = new SettingsRepo(foraging, this);
 	}
 
 	public Connection getConnection() {
@@ -111,5 +114,9 @@ public class Database {
 
 	public StatsRepo getStatsRepo() {
 		return statsRepo;
+	}
+
+	public SettingsRepo getSettingsRepo() {
+		return settingsRepo;
 	}
 }
