@@ -37,6 +37,9 @@ public class LangManager {
 		return this.messages.get(id);
 	}
 
+	/**
+	 * Load all language files.
+	 */
 	public void load() {
 		FileConfiguration languages = this.foraging.getConfigManager().get("languages");
 		// Just wipe everything.
