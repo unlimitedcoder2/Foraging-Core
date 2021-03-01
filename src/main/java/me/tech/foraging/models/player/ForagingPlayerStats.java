@@ -1,14 +1,14 @@
 package me.tech.foraging.models.player;
 
 public class ForagingPlayerStats {
-	private double health;
-	private double damage;
-	private double defense;
-	private double speed;
-	private double weight;
+	private int health;
+	private int damage;
+	private int defense;
+	private int speed;
+	private int weight;
 	private int power;
 
-	public ForagingPlayerStats(double health, double damage, double defense, double speed, double weight, int power) {
+	public ForagingPlayerStats(int health, int damage, int defense, int speed, int weight, int power) {
 		this.health = health;
 		this.damage = damage;
 		this.defense = defense;
@@ -17,38 +17,38 @@ public class ForagingPlayerStats {
 		this.power = power;
 	}
 
-	public double getHealth() {
+	public int getHealth() {
 		return health;
 	}
-	public void setHealth(double health) {
+	public void setHealth(int health) {
 		this.health = health;
 	}
 
-	public double getDamage() {
+	public int getDamage() {
 		return damage;
 	}
-	public void setDamage(double damage) {
+	public void setDamage(int damage) {
 		this.damage = damage;
 	}
 
-	public double getDefense() {
+	public int getDefense() {
 		return defense;
 	}
-	public void setDefense(double defense) {
+	public void setDefense(int defense) {
 		this.defense = defense;
 	}
 
-	public double getSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
-	public void setSpeed(double speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 
-	public double getWeight() {
+	public int getWeight() {
 		return weight;
 	}
-	public void setWeight(double weight) {
+	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
