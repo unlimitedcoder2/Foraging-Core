@@ -3,11 +3,17 @@ package me.tech.foraging;
 import me.tech.foraging.commands.SetLanguageCommand;
 import me.tech.foraging.database.Database;
 import me.tech.foraging.items.ItemManager;
+import me.tech.foraging.player.ForagingPlayer;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 public class Foraging extends JavaPlugin {
 	private final PluginManager pluginManager = this.getServer().getPluginManager();
+
+	private HashMap<UUID, ForagingPlayer> players = new HashMap<>();
 
 	private ItemManager itemManager;
 	private ConfigManager configManager;
@@ -89,5 +95,9 @@ public class Foraging extends JavaPlugin {
 
 	public Database getDatabase() {
 		return database;
+	}
+
+	public HashMap<UUID, ForagingPlayer> getPlayers() {
+		return players;
 	}
 }
