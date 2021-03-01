@@ -1,22 +1,31 @@
 package me.tech.foraging.models.player;
 
-public enum ForagingPlayerLanguage {
-	en_us("English", "en_us"),
-	uwu("UwU", "uwu");
+public class ForagingPlayerLanguage {
+	private String id;
+	private String name;
+	private boolean enabled;
+	private boolean hidden;
 
-	private final String name;
-	private final String id;
-
-	ForagingPlayerLanguage(String name, String id) {
-		this.name = name;
+	public ForagingPlayerLanguage(String id, String name, boolean enabled, boolean hidden) {
 		this.id = id;
+		this.name = name;
+		this.enabled = enabled;
+		this.hidden = hidden;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getId() {
-		return id;
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public boolean isHidden() {
+		return hidden;
 	}
 }
