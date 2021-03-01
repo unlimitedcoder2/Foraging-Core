@@ -10,4 +10,5 @@ commands:
     invalidLanguage:
       - '&cSorry! That''s not a valid language.'
       - '&cSupported languages: &f{languages}&c.'
+    disabled: '&cSorry! This message is currently disabled.'
     success: '&aYou have updated your language to &f{language}&a.'

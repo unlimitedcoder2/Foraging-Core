@@ -1,0 +1,13 @@
+core:
+  invalidPermissions: '&cFuck off you don''t have the needed permissions to do this shit.'
+commands:
+  giveitem:
+    usage: '&cUsage: /giveitem <player> <id> <amount>.'
+    invalidItem: '&cRetard! You entered an invalid item id.'
+    success: '&aLucky bastard &f{receiver} &agot a &r{itemName}&a.'
+  setlanguage:
+    usage: '&cUsage: /setlanguage <language>.'
+    invalidLanguage:
+      - '&cBritish is the only language.'
+    disabled: ''
+    success: '&aSomehow you saw through my plot and found another language &f{language}&a.'

@@ -10,4 +10,5 @@ commands:
     invalidLanguage:
       - '&cSowwy! That''s nyot a vawid wanguage.'
       - '&cSuppowted wanguages: &f{languages}&c.'
+    disabled: '&cSowwy! This wanguage is cuwwentwy disabwed.'
     success: '&au have updated ur wanguage to &f{language}&a.'

@@ -32,23 +32,30 @@ public class SetLanguageCommand implements CommandExecutor {
 			player.sendMessage(foraging.getLangManager().get("en_us.commands.setlanguage.usage"));
 			return true;
 		}
-		String newLanguageID = strings[0];
-		ForagingPlayerLanguage newLanguage;
 
-		// If there's an error setting the new language
-		// then it's probably an invalid id.
-		try {
-			newLanguage = ForagingPlayerLanguage.valueOf(newLanguageID);
-		} catch(IllegalArgumentException ignored) {
+		String newLanguageID = strings[0];
+		if(!foraging.getLangManager().getSupportedLanguages().containsKey(newLanguageID)) {
+			// Just a list of all valid languages.
 			List<String> supportedLanguages = new ArrayList<>();
-			for(ForagingPlayerLanguage language : ForagingPlayerLanguage.values())
-				supportedLanguages.add(language.getId());
+
+			foraging.getLangManager().getSupportedLanguages().values().forEach(language -> {
+				if(!language.isHidden() && language.isEnabled())
+					supportedLanguages.add(language.getId());
+			});
 
 			player.sendMessage(
 					foraging.getLangManager().get("en_us.commands.setlanguage.invalidLanguage")
 					.replace("{languages}", String.join(", ", supportedLanguages))
 			);
 
+			return true;
+		}
+
+		ForagingPlayerLanguage newLanguage = foraging.getLangManager().getSupportedLanguages().get(newLanguageID);
+		if(!newLanguage.isEnabled()) {
+			player.sendMessage(
+					foraging.getLangManager().get("en_us.commands.setlanguage.disabled")
+			);
 			return true;
 		}
 
