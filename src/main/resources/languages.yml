@@ -1,11 +1,11 @@
 en_us:
   name: 'English'
   enabled: true
-  hidden: false
+  hidden: true
 en_gb:
   name: 'British English'
   enabled: true
-  hidden: true
+  hidden: false
 uwu:
   name: 'UwU'
   enabled: true
