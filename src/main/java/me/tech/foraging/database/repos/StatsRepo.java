@@ -29,10 +29,20 @@ public class StatsRepo {
 	 * @throws SQLException
 	 */
 	public boolean createStats(String uuid) throws SQLException {
-		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO stats (uuid, health, damage) VALUES (?, ?, ?)");
+		PreparedStatement statement = this.connection.prepareStatement("INSERT INTO stats (uuid, health, damage, defense, speed, weight, power) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		statement.setString(1, uuid);
-		statement.setDouble(2, 20);
-		statement.setDouble(3, 5);
+		// Health
+		statement.setInt(2, 20);
+		// Damage
+		statement.setInt(3, 5);
+		// Defense
+		statement.setInt(4, 0);
+		// Speed
+		statement.setInt(5, 100);
+		// Weight
+		statement.setInt(6, 0);
+		// Power
+		statement.setInt(7, 0);
 
 		return statement.execute();
 	}

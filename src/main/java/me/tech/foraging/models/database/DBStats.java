@@ -18,8 +18,8 @@ public class DBStats {
 		DBStats dbStats = new DBStats();
 
 		dbStats.uuid = result.getString("uuid");
-		dbStats.health = result.getDouble("health");
-		dbStats.damage = result.getDouble("damage");
+		dbStats.health = result.getInt("health");
+		dbStats.damage = result.getInt("damage");
 
 		return dbStats;
 	}
