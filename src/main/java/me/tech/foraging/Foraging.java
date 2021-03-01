@@ -1,6 +1,7 @@
 package me.tech.foraging;
 
 import me.tech.foraging.commands.SetLanguageCommand;
+import me.tech.foraging.database.Database;
 import me.tech.foraging.items.ItemManager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -11,6 +12,7 @@ public class Foraging extends JavaPlugin {
 	private ItemManager itemManager;
 	private ConfigManager configManager;
 	private LangManager langManager;
+	private Database database;
 
 	@Override
 	public void onEnable() {
@@ -54,6 +56,9 @@ public class Foraging extends JavaPlugin {
 		this.langManager = new LangManager(this);
 		this.langManager.load();
 
+		this.database = new Database(this);
+		this.database.establishConnection();
+
 		getLogger().info("Reloaded system managers.");
 	}
 
@@ -80,5 +85,9 @@ public class Foraging extends JavaPlugin {
 
 	public LangManager getLangManager() {
 		return langManager;
+	}
+
+	public Database getDatabase() {
+		return database;
 	}
 }
