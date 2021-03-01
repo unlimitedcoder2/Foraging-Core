@@ -6,3 +6,5 @@ depend: [HolographicDisplays, WorldGuard, WorldGuardEvents]
 commands:
   setlanguage:
     usage: /setlanguage
+  testcmd:
+    usage: /testcmd

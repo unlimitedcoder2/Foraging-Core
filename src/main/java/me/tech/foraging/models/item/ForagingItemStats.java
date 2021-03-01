@@ -3,14 +3,14 @@ package me.tech.foraging.models.item;
 import static me.tech.foraging.utils.ChatUtils.color;
 
 public class ForagingItemStats {
-	private final double health;
-	private final double damage;
-	private final double defense;
-	private final double speed;
-	private final double weight;
+	private final int health;
+	private final int damage;
+	private final int defense;
+	private final int speed;
+	private final int weight;
 	private final int power;
 
-	public ForagingItemStats(double health, double damage, double defense, double speed, double weight, int power) {
+	public ForagingItemStats(int health, int damage, int defense, int speed, int weight, int power) {
 		this.health = health;
 		this.damage = damage;
 		this.defense = defense;
@@ -22,7 +22,7 @@ public class ForagingItemStats {
 	/**
 	 * @return How much additional health the item gives.
 	 */
-	public double getHealth() {
+	public int getHealth() {
 		return health;
 	}
 
@@ -37,7 +37,7 @@ public class ForagingItemStats {
 	/**
 	 * @return How much damage the item does.
 	 */
-	public double getDamage() {
+	public int getDamage() {
 		return damage;
 	}
 
@@ -52,7 +52,7 @@ public class ForagingItemStats {
 	/**
 	 * @return How much additional defense the item gives.
 	 */
-	public double getDefense() {
+	public int getDefense() {
 		return defense;
 	}
 
@@ -67,7 +67,7 @@ public class ForagingItemStats {
 	/**
 	 * @return How much faster the player will be while using the item.
 	 */
-	public double getSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
 
@@ -82,7 +82,7 @@ public class ForagingItemStats {
 	/**
 	 * @return How much weight that will be added onto the player.
 	 */
-	public double getWeight() {
+	public int getWeight() {
 		return weight;
 	}
 

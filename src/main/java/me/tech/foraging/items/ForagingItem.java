@@ -22,12 +22,18 @@ public class ForagingItem extends ForagingItemModel {
 	public ItemStack getItem() {
 		ItemStack item = this.getItemStack();
 		item = applyGlowing(item);
-		item.getLore().addAll(applyLore());
-		item.getLore().addAll(applyStatsLore());
 
-		String name = color(String.format("%s%s", getRarity().getBoldColor(), getName()));
-		item.getItemMeta().displayName(text(name));
+		List<String> lore = new ArrayList<>();
+		applyLore().forEach(line -> lore.add(color(line)));
+		applyStatsLore().forEach(line -> lore.add(color(line)));
+		item.setLore(lore);
 
+		String name = color(String.format("%s%s", getRarity().getColor(), getName()));
+
+		ItemMeta meta = item.getItemMeta();
+		meta.displayName(text(name));
+
+		item.setItemMeta(meta);
 		return item;
 	}
 
@@ -41,8 +47,9 @@ public class ForagingItem extends ForagingItemModel {
 		if(!isGlowing()) return item;
 		ItemMeta meta = item.getItemMeta();
 
-		if(item.getType() != Material.FISHING_ROD) meta.addEnchant(Enchantment.LURE, 1, false);
-		else meta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, false);
+		// TODO: 2/28/2021 Make enchantments invisible.
+		if(item.getType() != Material.FISHING_ROD) meta.addEnchant(Enchantment.LURE, 1, true);
+		else meta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
 
 		item.setItemMeta(meta);
 		return item;
@@ -54,13 +61,24 @@ public class ForagingItem extends ForagingItemModel {
 	 */
 	private List<String> applyLore() {
 		List<String> lore = new ArrayList<>();
-		lore.add(String.format("%s%s", getRarity().getBoldColor(), getName()));
+		lore.add(String.format("%s%s", getRarity().getBoldColor(), getRarity().getName()));
 
 		if(getLore().size() != 0) {
 			lore.add("");
-			for(String line : getLore()) lore.add(color(line));
+			for(String line : getLore()) lore.add(line);
 		}
 
+		return lore;
+	}
+
+	/**
+	 * If the tiem has any abilities apply the lore that goes
+	 * along with it.
+	 * @return
+	 */
+	// TODO: 2/28/2021 Item abilities aren't done yet.
+	private List<String> applyAbilities() {
+		List<String> lore = new ArrayList<>();
 		return lore;
 	}
 
