@@ -3,6 +3,7 @@ package me.tech.foraging;
 import static me.tech.foraging.utils.ChatUtils.color;
 
 import me.tech.foraging.models.player.ForagingPlayerLanguage;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class LangManager {
 	private final Foraging foraging;
 
 	private final HashMap<String, String> messages = new HashMap<>();
+	private final HashMap<String, ForagingPlayerLanguage> supportedLanguages = new HashMap<>();
 
 	public LangManager(Foraging foraging) {
 		this.foraging = foraging;
@@ -36,27 +38,47 @@ public class LangManager {
 	}
 
 	public void load() {
-		ForagingPlayerLanguage[] supportedLanguages = ForagingPlayerLanguage.values();
+		FileConfiguration languages = this.foraging.getConfigManager().get("languages");
+		// Just wipe everything.
 		this.messages.clear();
+		this.supportedLanguages.clear();
 
-		for(ForagingPlayerLanguage language : supportedLanguages) {
-			FileConfiguration configuration = foraging.getConfigManager().get(language.getId());
-
-			for(String path : configuration.getKeys(true)) {
-				if(!configuration.isSet(path)) continue;
-
-				if(configuration.isString(path)) {
+		for(String language : languages.getKeys(false)) {
+			foraging.getLogger().info(String.format("Testing language %s", language));
+			FileConfiguration languageConfiguration = foraging.getConfigManager().get(language);
+			// Load all messages in the lang file.
+			for(String path : languageConfiguration.getKeys(true)) {
+				if(!languageConfiguration.isSet(path)) continue;
+				// If it's just a string put it in the hashmap.
+				if(languageConfiguration.isString(path)) {
 					this.messages.put(
-							String.format("%s.%s", language.getId(), path),
-							color(configuration.getString(path))
+							String.format("%s.%s", language, path),
+							color(languageConfiguration.getString(path))
 					);
-				} else if(configuration.isList(path)) {
+				// If it's a list join it with a newline.
+				} else if(languageConfiguration.isList(path)) {
 					this.messages.put(
-							String.format("%s.%s", language.getId(), path),
-							color(String.join("\n", configuration.getStringList(path)))
+							String.format("%s.%s", language, path),
+							color(String.join("\n", languageConfiguration.getStringList(path)))
 					);
 				}
 			}
+			// Information about language in languages.yml
+			ConfigurationSection languageInfo = languages.getConfigurationSection(language);
+			// Add the language to the list of supported languages.
+			this.supportedLanguages.put(
+					language,
+					new ForagingPlayerLanguage(
+							language,
+							languageInfo.getString("name"),
+							languageInfo.getBoolean("enabled"),
+							languageInfo.getBoolean("hidden")
+					)
+			);
 		}
+	}
+
+	public HashMap<String, ForagingPlayerLanguage> getSupportedLanguages() {
+		return supportedLanguages;
 	}
 }

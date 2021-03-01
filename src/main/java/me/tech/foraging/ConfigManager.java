@@ -1,16 +1,12 @@
 package me.tech.foraging;
 
-import me.tech.foraging.models.player.ForagingPlayerLanguage;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ConfigManager {
 	private final Foraging foraging;
@@ -34,9 +30,7 @@ public class ConfigManager {
 	 * Main configuration loader.
 	 */
 	public void load() {
-		String[] configurations = {"config.yml"};
-
-		this.loadLanguages();
+		String[] configurations = {"config.yml", "languages.yml"};
 
 		for(String config : configurations) {
 			List<String> currentPath = new ArrayList<>();
@@ -64,6 +58,9 @@ public class ConfigManager {
 				ex.printStackTrace();
 			}
 		}
+
+		// just like load languages after because im lazy.
+		this.loadLanguages();
 	}
 
 	/**
@@ -71,19 +68,19 @@ public class ConfigManager {
 	 */
 	protected void loadLanguages() {
         createFolder("lang");
-        ForagingPlayerLanguage[] supportedLanguages = ForagingPlayerLanguage.values();
+		Set<String> languages = get("languages").getKeys(false);
 
-        for(ForagingPlayerLanguage language : supportedLanguages) {
-        	File file = new File(foraging.getDataFolder(), String.format("lang/%s.yml", language.getId()));
+        for(String language : languages) {
+        	File file = new File(foraging.getDataFolder(), String.format("lang/%s.yml", language));
 
         	if(!file.exists())
-        		foraging.saveResource(String.format("lang/%s.yml", language.getId()), false);
+        		foraging.saveResource(String.format("lang/%s.yml", language), false);
 
             FileConfiguration configurationFile = new YamlConfiguration();
 			try {
 				configurationFile.load(file);
 				this.configurations.put(
-						language.getId(),
+						language,
 						configurationFile
 				);
 			} catch(IOException | InvalidConfigurationException ex) {

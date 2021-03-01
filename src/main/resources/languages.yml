@@ -1,0 +1,12 @@
+en_us:
+  name: 'English'
+  enabled: true
+  hidden: false
+en_gb:
+  name: 'British English'
+  enabled: true
+  hidden: true
+uwu:
+  name: 'UwU'
+  enabled: true
+  hidden: false
